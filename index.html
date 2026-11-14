@@ -1,37 +1,42 @@
 <!doctype html>
 <html lang="hi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101827">
-  <meta name="description" content="BAJRANG AI — आपका व्यक्तिगत प्रोजेक्ट होम पेज।">
-  <title>BAJRANG AI</title>
-  <style>
-    :root { color-scheme: dark; --bg:#101827; --panel:#19263a; --accent:#63d6b3; --muted:#aab8ca; }
-    * { box-sizing:border-box; }
-    body { margin:0; min-height:100vh; display:grid; place-items:center; padding:24px; background:radial-gradient(circle at top,#243b55,var(--bg) 60%); color:#f7fafc; font:16px system-ui,-apple-system,Segoe UI,sans-serif; }
-    main { width:min(100%,560px); padding:32px 24px; text-align:center; background:rgba(25,38,58,.92); border:1px solid #33465f; border-radius:24px; box-shadow:0 18px 55px #0006; }
-    .mark { width:72px; height:72px; margin:0 auto 18px; display:grid; place-items:center; border-radius:22px; background:var(--accent); color:#102033; font-size:30px; font-weight:800; }
-    h1 { margin:0; letter-spacing:.08em; font-size:clamp(28px,8vw,42px); }
-    .tag { margin:10px 0 24px; color:var(--accent); font-weight:600; }
-    p { color:var(--muted); line-height:1.65; }
-    a { display:inline-block; margin-top:18px; padding:13px 22px; border-radius:12px; background:var(--accent); color:#102033; text-decoration:none; font-weight:700; }
-    footer { margin-top:26px; color:#8192a9; font-size:12px; }
-  </style>
-  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827"><meta name="description" content="Bajrang AI - पढ़ाई और Farming Simulator 18 के हिसाब के मुफ्त टूल">
+<link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>Bajrang AI</title>
+<style>
+:root{color-scheme:dark;--bg:#101827;--panel:#19263a;--line:#34465e;--mint:#63d6b3;--muted:#aab8ca}*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#203650,var(--bg) 60%);color:#f7fafc;font:16px system-ui,sans-serif;min-height:100vh}header{padding:22px 16px;text-align:center}header .logo{margin:auto;width:58px;height:58px;border-radius:18px;background:var(--mint);color:#102033;display:grid;place-items:center;font-size:28px;font-weight:900}h1{margin:10px 0 4px;letter-spacing:2px}.sub{color:var(--mint);margin:0}.wrap{max-width:760px;margin:auto;padding:0 14px 40px}.tabs{display:flex;gap:8px;overflow:auto;margin:10px 0 16px}.tabs button,button{border:0;border-radius:12px;padding:11px 14px;background:var(--mint);color:#102033;font-weight:750;cursor:pointer}.tabs button{white-space:nowrap;background:#263951;color:#fff}.tabs button.active{background:var(--mint);color:#102033}.card{background:rgba(25,38,58,.96);border:1px solid var(--line);border-radius:18px;padding:18px;margin:12px 0}.card h2{font-size:20px;margin:0 0 12px}.muted,small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stat{background:#122238;border-radius:12px;padding:12px}.stat b{display:block;color:var(--mint);font-size:20px;overflow-wrap:anywhere}input,textarea{width:100%;background:#0e1a2b;color:white;border:1px solid #49617e;border-radius:10px;padding:12px;font:inherit;margin:6px 0 10px}textarea{min-height:105px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap}.secondary{background:#31445e;color:white}.danger{background:#623c48;color:white}.hidden{display:none}.result{white-space:pre-wrap;line-height:1.6;background:#122238;border-radius:12px;padding:12px;margin-top:10px}.rowline{display:flex;justify-content:space-between;gap:8px;align-items:center;border-bottom:1px solid #34465e;padding:9px 0}.rowline:last-child{border:0}footer{text-align:center;color:#8192a9;font-size:12px;padding:20px}
+</style>
 </head>
 <body>
-  <main>
-    <div class="mark" aria-hidden="true">B</div>
-    <h1>BAJRANG AI</h1>
-    <div class="tag">आपका स्मार्ट AI प्रोजेक्ट होम</div>
-    <p>पढ़ाई, योजनाओं और आपके प्रोजेक्ट्स के लिए एक जगह।</p>
-    <p lang="hi">नमस्ते! बजरंग AI में आपका स्वागत है।</p>
-    <section aria-label="Bajrang AI home" style="margin-top:22px;padding:16px;border:1px solid #3a506b;border-radius:14px;background:#142238">
-      <strong style="color:var(--accent)">BAJRANG AI Home</strong>
-      <p style="margin-bottom:0">यह आपका BAJRANG AI होम पेज है। इस वेबसाइट पर अभी स्वतंत्र AI चैट सुविधा जुड़ी नहीं है।</p>
-    </section>
-    <footer>Made with AI · Personal project</footer>
-  </main>
-</body>
-</html>
+<header><div class="logo">B</div><h1>BAJRANG AI</h1><p class="sub">आपका पढ़ाई और गेम हिसाब साथी</p></header>
+<div class="wrap">
+<nav class="tabs" aria-label="मुख्य टूल"><button class="active" data-tab="home">होम</button><button data-tab="fs">FS 18 हिसाब</button><button data-tab="study">पढ़ाई सहायक</button><button data-tab="calc">कैलकुलेटर</button></nav>
+<section id="home" class="panel">
+<div class="card"><h2>नमस्ते! 👋</h2><p class="muted">Bajrang AI के मुफ्त टूल तैयार हैं। आपका सेव किया हुआ हिसाब इसी ब्राउज़र में रहेगा।</p><div class="grid"><div class="stat"><span class="muted">गेम हिसाब</span><b>FS 18</b></div><div class="stat"><span class="muted">पढ़ाई</span><b>Study</b></div><div class="stat"><span class="muted">गणना</span><b>Calculator</b></div><div class="stat"><span class="muted">इंटरनेट के बिना</span><b>App shell</b></div></div></div>
+<div class="card"><h2>जरूरी जानकारी</h2><p class="muted">यह संस्करण मुफ्त ऑफलाइन टूल देता है। यह अभी इंटरनेट वाला असली AI चैट नहीं है। अपनी निजी जानकारी या पासवर्ड यहाँ न लिखें।</p></div>
+</section>
+<section id="fs" class="panel hidden">
+<div class="card"><h2>🌾 Farming Simulator 18 — गेहूँ</h2><div class="grid"><div class="stat"><span class="muted">मौजूदा स्टोरेज</span><b id="wheat">416,699</b></div><div class="stat"><span class="muted">लक्ष्य</span><b>1,000,000</b></div><div class="stat"><span class="muted">बाकी</span><b id="remain">583,301</b></div><div class="stat"><span class="muted">प्रगति</span><b id="percent">41.7%</b></div></div><label for="amount">गेहूँ की मात्रा</label><input id="amount" type="number" min="0" step="1" placeholder="उदाहरण: 5000"><div class="actions"><button id="add">फसल जोड़ें</button><button class="secondary" id="sell">बिक्री घटाएँ</button></div><p id="fsmsg" class="muted">शुरुआती रिकॉर्ड: 416,699</p></div>
+<div class="card"><h2>अन्य साइलो</h2><div id="silos"></div><p class="muted">इनकी मात्रा अभी शुरुआती रिकॉर्ड के अनुसार है।</p></div>
+<div class="card"><h2>हिसाब रीसेट</h2><p class="muted">रीसेट करने से केवल इस डिवाइस में सेव गेहूँ की मात्रा 416,699 हो जाएगी।</p><button class="danger" id="reset">गेहूँ रीसेट करें</button></div>
+</section>
+<section id="study" class="panel hidden"><div class="card"><h2>📚 पढ़ाई सहायक</h2><p class="muted">अपना विषय या सवाल लिखें। यह टूल आपका सवाल और पढ़ाई नोट्स इसी फोन में सेव करेगा; उत्तर अपने आप AI से नहीं बनाता।</p><label for="topic">विषय / सवाल</label><textarea id="topic" placeholder="उदाहरण: कक्षा 10 सामाजिक विज्ञान — लोकतंत्र"></textarea><div class="actions"><button id="saveNote">नोट सेव करें</button><button class="secondary" id="clearNote">मिटाएँ</button></div><div id="notes" class="result">अभी कोई नोट सेव नहीं है।</div></div></section>
+<section id="calc" class="panel hidden"><div class="card"><h2>🧮 कैलकुलेटर</h2><label for="expr">गणना लिखें</label><input id="expr" inputmode="decimal" placeholder="उदाहरण: 450000 + 25000"><button id="calculate">जवाब निकालें</button><div id="calcresult" class="result">जवाब यहाँ दिखेगा।</div><p class="muted">केवल सामान्य जोड़, घटाव, गुणा और भाग समर्थित हैं।</p></div></section>
+<footer>BAJRANG AI · मुफ्त व्यक्तिगत टूल</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);const fmt=n=>Number(n).toLocaleString('en-IN');
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden');document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b))}));
+let wheat=Number(localStorage.getItem('bajrang_wheat'));if(!Number.isFinite(wheat)||wheat<0)wheat=416699;
+function renderFS(){$('wheat').textContent=fmt(wheat);$('remain').textContent=fmt(Math.max(0,1000000-wheat));$('percent').textContent=(wheat/1000000*100).toFixed(1)+'%';$('silos').innerHTML=['Canola','Corn','Sunflower','Sugarbeet'].map(x=>'<div class="rowline"><span>'+x+'</span><b>10,000</b></div>').join('');}
+function changeWheat(delta){if(!Number.isFinite(delta)||delta<=0){$('fsmsg').textContent='कृपया शून्य से बड़ी सही मात्रा लिखें।';return}if(delta>wheat&&delta<0)return;wheat=Math.max(0,wheat+delta);localStorage.setItem('bajrang_wheat',String(wheat));renderFS();$('fsmsg').textContent='रिकॉर्ड अपडेट हुआ। नया गेहूँ: '+fmt(wheat)}
+$('add').onclick=()=>changeWheat(Number($('amount').value));$('sell').onclick=()=>changeWheat(-Number($('amount').value));$('reset').onclick=()=>{wheat=416699;localStorage.setItem('bajrang_wheat',String(wheat));renderFS();$('fsmsg').textContent='गेहूँ शुरुआती रिकॉर्ड पर रीसेट हुआ।'};
+const oldNote=localStorage.getItem('bajrang_study_note');if(oldNote)$('notes').textContent=oldNote;
+$('saveNote').onclick=()=>{const v=$('topic').value.trim();if(!v){$('notes').textContent='पहले अपना सवाल या विषय लिखें।';return}localStorage.setItem('bajrang_study_note',v);$('notes').textContent=v;$('topic').value='';};
+$('clearNote').onclick=()=>{localStorage.removeItem('bajrang_study_note');$('notes').textContent='अभी कोई नोट सेव नहीं है।'};
+$('calculate').onclick=()=>{const s=$('expr').value.trim();if(!/^[0-9+\-*/().\s]+$/.test(s)||!/[0-9]/.test(s)){$('calcresult').textContent='कृपया केवल अंक और + − × ÷ ( ) का उपयोग करें।';return}try{const result=Function('"use strict";return ('+s+')')();$('calcresult').textContent=Number.isFinite(result)?fmt(result):'यह गणना संभव नहीं है।'}catch(e){$('calcresult').textContent='गणना समझ नहीं आई।'}};
+renderFS();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+</script>
+</body></html>
