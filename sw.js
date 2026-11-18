@@ -1,10 +1,11 @@
-const CACHE_NAME = "bajrang-ai-dashboard-v6";
+const CACHE_NAME = "bajrang-ai-dashboard-v7";
 const APP_FILES = [
   "./",
   "./index.html",
   "./home.html",
   "./manifest.webmanifest",
-  "./icon.svg"
+  "./icon.svg",
+  "./founder.jpg"
 ];
 
 self.addEventListener("install", event => {
