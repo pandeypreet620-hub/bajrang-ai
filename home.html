@@ -151,6 +151,12 @@ $("chatForm").onsubmit=e=>{
   chatHistory.push({role:"user",content:v},{role:"assistant",content:reply});
   if(chatHistory.length>20)chatHistory.splice(0,chatHistory.length-20);
   addBubble(reply,"bot");
+  if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
+   const photoCard=document.createElement("div"); photoCard.className="bubble bot";
+   const photo=document.createElement("img"); photo.src="founder.jpg"; photo.alt="BAJRANG AI Founder photo";
+   photo.loading="lazy"; photo.style.maxWidth="180px"; photo.style.width="100%"; photo.style.height="auto"; photo.style.borderRadius="12px"; photo.style.display="block";
+   photoCard.appendChild(photo); $("chatLog").appendChild(photoCard); $("chatLog").scrollTop=$("chatLog").scrollHeight;
+  }
  }catch(err){
   addBubble(lang==="hi"?"माफ़ कीजिए, जवाब तैयार नहीं हो पाया।":"Sorry, I couldn't prepare a reply.","bot");
  }finally{sendBtn.disabled=false;}
