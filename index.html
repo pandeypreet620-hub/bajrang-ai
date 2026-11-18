@@ -103,7 +103,14 @@ footer{color:#9f906f}
 <nav class="bottom"><div class="nav"><button class="active" data-nav="homeView"><span>⌂</span><b data-i18n="home">Home</b></button><button data-nav="chatView"><span>✦</span><b data-i18n="chat">Chat</b></button><button data-nav="voiceView"><span>🎙</span><b data-i18n="voice">Voice</b></button><button data-nav="notesView"><span>▤</span><b data-i18n="notes">Notes</b></button><button data-nav="toolsView"><span>⚙</span><b data-i18n="tools">Tools</b></button></div></nav>
 <script>
 const $ = id => document.getElementById(id);
-let lang = localStorage.getItem("bajrang_lang") || "en";
+// Safe storage: some in-app browsers block localStorage and can stop all page scripts.
+const safeStorage = {
+ getItem(key){try{return window.localStorage ? window.localStorage.getItem(key) : null;}catch(e){return null;}},
+ setItem(key,value){try{if(window.localStorage)window.localStorage.setItem(key,value);}catch(e){}},
+ removeItem(key){try{if(window.localStorage)window.localStorage.removeItem(key);}catch(e){}}
+};
+function readStoredList(key){try{const value=JSON.parse(safeStorage.getItem(key)||"[]");return Array.isArray(value)?value:[];}catch(e){return [];}}
+let lang = safeStorage.getItem("bajrang_lang") || "en";
 function showView(id) {
  document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
  document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("active", b.dataset.nav === id));
@@ -115,7 +122,7 @@ if ($("settingsBtn")) $("settingsBtn").addEventListener("click",()=>showView("se
 if ($("backHome")) $("backHome").addEventListener("click",()=>showView("homeView"));
 if ($("langBtn")) $("langBtn").addEventListener("click",()=>{
  lang = lang === "en" ? "hi" : "en";
- localStorage.setItem("bajrang_lang",lang);
+ safeStorage.setItem("bajrang_lang",lang);
  $("langBtn").textContent = lang === "en" ? "हिंदी" : "English";
  document.documentElement.lang = lang === "hi" ? "hi" : "en";
 });
@@ -148,11 +155,11 @@ if($("chatForm")) $("chatForm").addEventListener("submit",e=>{
  }
 });
 if($("clearChat")) $("clearChat").addEventListener("click",()=>{$("chatLog").innerHTML="";addBubble(lang==="hi"?"नमस्ते! मैं BAJRANG AI हूँ।":"Hello! I am BAJRANG AI.","bot");});
-function loadNotes(){const a=JSON.parse(localStorage.getItem("bajrang_notes")||"[]");$("savedNotes").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v;d.addEventListener("click",()=>{if(confirm("Delete this note?")){a.splice(i,1);localStorage.setItem("bajrang_notes",JSON.stringify(a));loadNotes();}});$("savedNotes").appendChild(d);});}
-if($("saveNote")) $("saveNote").addEventListener("click",()=>{const v=$("noteInput").value.trim();if(!v)return;const a=JSON.parse(localStorage.getItem("bajrang_notes")||"[]");a.unshift(v);localStorage.setItem("bajrang_notes",JSON.stringify(a));$("noteInput").value="";loadNotes();});
-if($("clearNote")) $("clearNote").addEventListener("click",()=>{if(confirm("Clear all notes?")){localStorage.removeItem("bajrang_notes");loadNotes();}});
-function loadReminders(){const a=JSON.parse(localStorage.getItem("bajrang_reminders")||"[]");$("reminderList").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v.text+" — "+v.time;d.addEventListener("click",()=>{a.splice(i,1);localStorage.setItem("bajrang_reminders",JSON.stringify(a));loadReminders();});$("reminderList").appendChild(d);});}
-if($("addReminder")) $("addReminder").addEventListener("click",()=>{const t=$("reminderText").value.trim(),when=$("reminderTime").value;if(!t||!when)return;const a=JSON.parse(localStorage.getItem("bajrang_reminders")||"[]");a.push({text:t,time:when});localStorage.setItem("bajrang_reminders",JSON.stringify(a));$("reminderText").value="";$("reminderTime").value="";loadReminders();});
+function loadNotes(){const a=readStoredList("bajrang_notes");$("savedNotes").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v;d.addEventListener("click",()=>{if(confirm("Delete this note?")){a.splice(i,1);safeStorage.setItem("bajrang_notes",JSON.stringify(a));loadNotes();}});$("savedNotes").appendChild(d);});}
+if($("saveNote")) $("saveNote").addEventListener("click",()=>{const v=$("noteInput").value.trim();if(!v)return;const a=JSON.parse(safeStorage.getItem("bajrang_notes")||"[]");a.unshift(v);safeStorage.setItem("bajrang_notes",JSON.stringify(a));$("noteInput").value="";loadNotes();});
+if($("clearNote")) $("clearNote").addEventListener("click",()=>{if(confirm("Clear all notes?")){safeStorage.removeItem("bajrang_notes");loadNotes();}});
+function loadReminders(){const a=readStoredList("bajrang_reminders");$("reminderList").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v.text+" — "+v.time;d.addEventListener("click",()=>{a.splice(i,1);safeStorage.setItem("bajrang_reminders",JSON.stringify(a));loadReminders();});$("reminderList").appendChild(d);});}
+if($("addReminder")) $("addReminder").addEventListener("click",()=>{const t=$("reminderText").value.trim(),when=$("reminderTime").value;if(!t||!when)return;const a=JSON.parse(safeStorage.getItem("bajrang_reminders")||"[]");a.push({text:t,time:when});safeStorage.setItem("bajrang_reminders",JSON.stringify(a));$("reminderText").value="";$("reminderTime").value="";loadReminders();});
 if($("batteryCheck")) $("batteryCheck").addEventListener("click",async()=>{if(!navigator.getBattery){$("batteryInfo").textContent="Battery information unavailable";return;}try{const b=await navigator.getBattery();$("batteryInfo").textContent=Math.round(b.level*100)+"%"+(b.charging?" · Charging":"");}catch(e){$("batteryInfo").textContent="Battery information unavailable";}});
 if($("deviceInfo")) $("deviceInfo").textContent=navigator.userAgent.includes("Android")?"Android phone · Browser":"Browser device";
 if($("listenBtn")) $("listenBtn").addEventListener("click",()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("voiceResult").textContent="Speech recognition is not supported in this browser.";return;}const rec=new SR();rec.lang=lang==="hi"?"hi-IN":"en-IN";rec.onresult=e=>$("voiceResult").textContent=e.results[0][0].transcript;rec.onerror=()=> $("voiceResult").textContent="Could not recognize speech.";rec.start();});
