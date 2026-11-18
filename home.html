@@ -75,104 +75,64 @@ footer{text-align:center;color:#74839a;font-size:11px;padding:24px 0 4px}
 </div>
 <nav class="bottom"><div class="nav"><button class="active" data-nav="homeView"><span>⌂</span><b data-i18n="home">Home</b></button><button data-nav="chatView"><span>✦</span><b data-i18n="chat">Chat</b></button><button data-nav="voiceView"><span>🎙</span><b data-i18n="voice">Voice</b></button><button data-nav="notesView"><span>▤</span><b data-i18n="notes">Notes</b></button><button data-nav="toolsView"><span>⚙</span><b data-i18n="tools">Tools</b></button></div></nav>
 <script>
-const $=id=>document.getElementById(id);
-const words={
-en:{subtitle:"YOUR PERSONAL ASSISTANT",welcome:"WELCOME TO YOUR SPACE",heroTitle:"Your day, your assistant.",heroText:"A simple personal dashboard for chat, voice, notes and everyday tools.",ready:"Dashboard ready",quick:"Quick access",choose:"Choose a tool",chat:"AI Chat",chatDesc:"Talk with your assistant",voice:"Voice Assistant",voiceDesc:"Speak your command",notes:"Notes",notesDesc:"Save ideas on this phone",reminders:"Reminders",remindersDesc:"Keep track of tasks",tools:"Phone tools",toolsDesc:"Useful device shortcuts",about:"About BAJRANG",aboutDesc:"Status and privacy",today:"Your personal space",localInfo:"This first dashboard version works in your browser. Notes are stored on this device only.",chatNotice:"Free local chat mode: basic replies run in this browser. No API key or paid service is connected.",chatHello:"Hello! I am BAJRANG AI. My chat brain is being connected.",typeMessage:"Type a message…",send:"Send",clear:"Clear",voiceNotice:"Tap the microphone and speak. Speech recognition depends on browser support and may need internet.",startListening:"Start listening",voiceIdle:"Your spoken words will appear here.",sendToChat:"Send to chat",notesNotice:"Notes stay in this browser on this device. Clearing browser data may erase them.",writeNote:"Write a note…",save:"Save note",reminderNotice:"Add a reminder. Keep this page open until the reminder time; browser notifications may require permission.",reminderName:"What should I remind you about?",addReminder:"Add reminder",toolsNotice:"These are safe shortcuts and information only. A website cannot silently control all Android settings.",device:"Device",battery:"Battery",batteryUnavailable:"Battery status is not available in this browser.",checkBattery:"Check battery",aboutText:"BAJRANG AI is your personal assistant project. This is the first dashboard release.",privacy:"Privacy",privacyText:"Notes and reminders are stored locally in this browser. Do not save passwords or sensitive information.",nextStep:"Next step",nextText:"Connect a real AI service and add approved Android features.",settings:"Settings",settingsText:"Choose your language from the top button. More settings will be added later.",backHome:"Back to dashboard",home:"Home",footer:"Personal Assistant · Built step by step"},
-hi:{subtitle:"आपका अपना पर्सनल असिस्टेंट",welcome:"आपकी अपनी डिजिटल जगह",heroTitle:"आपका दिन, आपका असिस्टेंट।",heroText:"चैट, आवाज़, नोट्स और रोज़मर्रा के टूल एक ही जगह।",ready:"डैशबोर्ड तैयार",quick:"जल्दी खोलें",choose:"कोई टूल चुनें",chat:"AI चैट",chatDesc:"अपने असिस्टेंट से बात करें",voice:"वॉइस असिस्टेंट",voiceDesc:"बोलकर आदेश दें",notes:"नोट्स",notesDesc:"फोन में अपने विचार सेव करें",reminders:"रिमाइंडर",remindersDesc:"अपने काम याद रखें",tools:"फोन टूल्स",toolsDesc:"काम के डिवाइस शॉर्टकट",about:"BAJRANG के बारे में",aboutDesc:"स्थिति और प्राइवेसी",today:"आपकी अपनी जगह",localInfo:"यह पहला डैशबोर्ड आपके ब्राउज़र में चलता है। नोट्स इसी डिवाइस में सेव होते हैं।",chatNotice:"ऑफलाइन स्मार्ट चैट: सामान्य जवाब इसी फोन पर मिलेंगे। किसी API Key या इंटरनेट की जरूरत नहीं; यह पूरा Generative AI मॉडल नहीं है।",chatHello:"नमस्ते! मैं BAJRANG AI हूँ। ऑफलाइन स्मार्ट चैट में आपका स्वागत है।",typeMessage:"अपना मैसेज लिखें…",send:"भेजें",clear:"साफ करें",voiceNotice:"माइक दबाकर बोलें। आवाज़ पहचानना ब्राउज़र पर निर्भर है और इंटरनेट की जरूरत हो सकती है।",startListening:"सुनना शुरू करें",voiceIdle:"आपकी बोली हुई बात यहाँ दिखेगी।",sendToChat:"चैट में भेजें",notesNotice:"नोट्स इसी फोन के इसी ब्राउज़र में रहेंगे। ब्राउज़र डेटा मिटाने पर ये हट सकते हैं।",writeNote:"अपना नोट लिखें…",save:"नोट सेव करें",reminderNotice:"रिमाइंडर जोड़ें। समय आने तक यह पेज खुला रखें; नोटिफिकेशन की अनुमति लग सकती है।",reminderName:"किस बात का रिमाइंडर चाहिए?",addReminder:"रिमाइंडर जोड़ें",toolsNotice:"ये सुरक्षित शॉर्टकट और जानकारी हैं। वेबसाइट Android की सभी सेटिंग्स को अपने आप नियंत्रित नहीं कर सकती।",device:"डिवाइस",battery:"बैटरी",batteryUnavailable:"इस ब्राउज़र में बैटरी की जानकारी उपलब्ध नहीं है।",checkBattery:"बैटरी जाँचें",aboutText:"BAJRANG AI आपका पर्सनल असिस्टेंट प्रोजेक्ट है। यह पहले डैशबोर्ड का संस्करण है।",privacy:"प्राइवेसी",privacyText:"नोट्स और रिमाइंडर इसी ब्राउज़र में सेव होते हैं। पासवर्ड या संवेदनशील जानकारी सेव न करें।",nextStep:"अगला कदम",nextText:"ऑफलाइन चैट बेहतर करना और अनुमति वाले Android फीचर जोड़ना।",settings:"सेटिंग्स",settingsText:"ऊपर दिए बटन से भाषा बदलें। बाकी सेटिंग्स बाद में जुड़ेंगी।",backHome:"डैशबोर्ड पर वापस",home:"होम",footer:"पर्सनल असिस्टेंट · धीरे-धीरे तैयार हो रहा है"}
-};
-let lang=localStorage.getItem("bajrang_lang")||"en";
-function applyLang(){document.documentElement.lang=lang==="hi"?"hi":"en";document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.dataset.i18n;if(words[lang][k])el.textContent=words[lang][k]});document.querySelectorAll("[data-placeholder]").forEach(el=>{const k=el.dataset.placeholder;if(words[lang][k])el.placeholder=words[lang][k]});$("langBtn").textContent=lang==="en"?"हिंदी":"English"}
-$("langBtn").onclick=()=>{lang=lang==="en"?"hi":"en";localStorage.setItem("bajrang_lang",lang);applyLang()};
-function showView(id){document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===id));document.querySelectorAll("[data-nav]").forEach(b=>b.classList.toggle("active",b.dataset.nav===id));window.scrollTo(0,0)}
-document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>showView(b.dataset.open));
-document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=()=>showView(b.dataset.nav));
-$("settingsBtn").onclick=()=>showView("settingsView");$("backHome").onclick=()=>showView("homeView");
-function addBubble(text,who){const d=document.createElement("div");d.className="bubble "+who;d.textContent=text;$("chatLog").appendChild(d);$("chatLog").scrollTop=$("chatLog").scrollHeight}
-// Offline Smart Chat: deterministic local responses; no API, key, or network call.
-let lastTopic = "";
-const chatHistory = [];
-function localReply(raw){
- const q=String(raw||"").trim();
- const s=q.toLowerCase();
- const hi=/[\u0900-\u097f]/.test(q) || lang==="hi";
- const say=(h,e)=>hi?h:e;
- const remember=t=>{lastTopic=t;return t};
- if(!q) return say("कुछ लिखकर भेजिए।","Please type a message.");
- if(/^(hi|hello|hey|namaste|namaskar|नमस्ते|नमस्कार|हेलो|हाय)[!. ]*$/i.test(q))
-  return say("नमस्ते! मैं BAJRANG AI हूँ। बताइए, आज किस काम में मदद करूँ?","Hello! I am BAJRANG AI. What can I help you with today?");
- if(/(तुम कौन|कौन हो|who are you|your name|तुम्हारा नाम)/i.test(s))
-  return "मैं BAJRANG AI हूँ — एक Offline Smart Assistant Demo। मैं इस फोन के ब्राउज़र में नियमों और उपलब्ध जानकारी के आधार पर जवाब देता हूँ।";
- if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(s))
-  return say("BAJRANG AI के Founder और Project Creator Preet Pandey हैं। गाँव: Bramankhedi। ChatGPT (GPT-6) ने AI Development Assistant के रूप में मदद की है।","BAJRANG AI was created by Preet Pandey from Bramankhedi. ChatGPT (GPT-6) assisted as the AI Development Assistant.");
- if(/(बजरंग एआई|bajrang ai).*(क्या|क्या है|about|बारे)/i.test(s))
-  return say("BAJRANG AI एक पर्सनल असिस्टेंट प्रोजेक्ट है। इसमें चैट, वॉइस, नोट्स और रिमाइंडर जैसे फीचर हैं। यह Offline Smart Chat अभी सीमित स्थानीय जवाब देता है।","BAJRANG AI is a personal assistant project with chat, voice, notes and reminders. Its offline chat currently provides limited local responses.");
- if(/(इंटरनेट|offline|ऑफलाइन|बिना नेट|बिना इंटरनेट)/i.test(s))
-  return say("यह लोकल चैट बिना इंटरनेट चल सकती है। लेकिन यह कोई बड़ा AI मॉडल नहीं है; इसके जवाब पहले से बनाए गए नियमों और इस कोड में उपलब्ध जानकारी पर आधारित हैं।","This local chat can run without internet. It is not a large AI model; replies are based on built-in rules and information.");
- if(/(क्या कर सकते|features|फीचर|मदद कर सकते|help me)/i.test(s))
-  return say("मैं अभी सामान्य अभिवादन, BAJRANG AI की जानकारी, Founder, तारीख-समय, कुछ आसान गणनाएँ और Notes/Reminders के उपयोग में मदद कर सकता हूँ। कठिन या नए सवालों का जवाब सीमित हो सकता है।","I can handle greetings, BAJRANG AI information, founder details, date/time, simple calculations, and guidance for Notes/Reminders. I may not know how to answer complex or new questions.");
- if(/(समय|टाइम|time|तारीख|date|आज कौन सा दिन)/i.test(s))
-  return say("आपके डिवाइस के अनुसार: "+new Date().toLocaleString("hi-IN"),"According to your device: "+new Date().toLocaleString());
- if(/(नोट|notes?)/i.test(s))
-  return say("नोट सेव करने के लिए डैशबोर्ड में Notes खोलें। नोट इसी ब्राउज़र में सेव होते हैं।","Open Notes on the dashboard to save a note. Notes are stored in this browser.");
- if(/(रिमाइंडर|याद दिला|reminder|remind)/i.test(s))
-  return say("रिमाइंडर बनाने के लिए Reminders सेक्शन खोलें। समय आने पर सूचना के लिए पेज खुला रखना पड़ सकता है।","Open Reminders to create one. The page may need to remain open for the reminder to fire.");
- if(/(धन्यवाद|शुक्रिया|thanks|thank you)/i.test(s))
-  return say("आपका स्वागत है! और किस चीज़ में मदद चाहिए?","You're welcome! What else can I help with?");
- if(/(मौसम|weather|आज बारिश)/i.test(s))
-  return say("मौसम की ताज़ा जानकारी के लिए इंटरनेट चाहिए। इस Offline मोड में मैं लाइव मौसम नहीं देख सकता।","Live weather needs internet. I cannot check current conditions in offline mode.");
- if(/(समाचार|खबर|news|आज की खबर)/i.test(s))
-  return say("ताज़ा समाचार देखने के लिए इंटरनेट कनेक्शन चाहिए।","Current news requires an internet connection.");
- const math=q.match(/^\s*(-?\d+(?:\.\d+)?)\s*([+\-*/×÷])\s*(-?\d+(?:\.\d+)?)\s*[=?]?\s*$/);
- if(math){
-  const a=Number(math[1]), b=Number(math[3]), op=math[2];
-  let n=op==="+"?a+b:op==="-"?a-b:(op==="*"||op==="×")?a*b:(b===0?null:a/b);
-  if(n===null)return say("शून्य से भाग नहीं कर सकते।","Division by zero is undefined.");
-  return say("जवाब: "+n,"Answer: "+n);
- }
- if(/(और बताओ|और बताइए|इसके बारे|more about that|tell me more|continue)/i.test(s) && lastTopic)
-  return say("हम अभी "+lastTopic+" के बारे में बात कर रहे थे। कोई खास सवाल पूछिए; मेरी जानकारी सीमित है।","We were discussing "+lastTopic+". Ask a specific question; my built-in knowledge is limited.");
- if(/(कैसे हो|कैसा है|how are you)/i.test(s))
-  return say("मैं ठीक से काम कर रहा हूँ! आप बताइए, क्या मदद चाहिए?","I'm running well! What can I help you with?");
- if(/(पढ़ाई|होमवर्क|study|school|कक्षा|class)/i.test(s)){
-  remember("पढ़ाई");
-  return say("पढ़ाई में मदद कर सकता हूँ। अपना विषय और सवाल लिखिए। ध्यान रहे, मेरे Offline जवाब सीमित हैं।","I can help with study questions. Tell me the subject and question. My offline knowledge is limited.");
- }
- remember(q.slice(0,70));
- return say("मैंने आपका संदेश पढ़ा, लेकिन इस सवाल का भरोसेमंद जवाब मेरे Offline ज्ञान में उपलब्ध नहीं है। थोड़ा सरल या स्पष्ट करके पूछिए।","I read your message, but I don't have a reliable built-in answer for that question. Please rephrase it more clearly.");
+const $ = id => document.getElementById(id);
+let lang = localStorage.getItem("bajrang_lang") || "en";
+function showView(id) {
+ document.querySelectorAll(".view").forEach(v => v.classList.toggle("active", v.id === id));
+ document.querySelectorAll("[data-nav]").forEach(b => b.classList.toggle("active", b.dataset.nav === id));
+ window.scrollTo(0,0);
 }
-$("chatForm").onsubmit=e=>{
- e.preventDefault();
- const v=$("chatInput").value.trim(); if(!v)return;
- addBubble(v,"user"); $("chatInput").value="";
- const sendBtn=$("chatForm").querySelector('button[type="submit']");
- sendBtn.disabled=true;
- try{
-  const reply=localReply(v);
-  chatHistory.push({role:"user",content:v},{role:"assistant",content:reply});
-  if(chatHistory.length>20)chatHistory.splice(0,chatHistory.length-20);
-  addBubble(reply,"bot");
-  if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
-   const photoCard=document.createElement("div"); photoCard.className="bubble bot";
-   const photo=document.createElement("img"); photo.src="founder.jpg"; photo.alt="BAJRANG AI Founder photo";
-   photo.loading="lazy"; photo.style.maxWidth="180px"; photo.style.width="100%"; photo.style.height="auto"; photo.style.borderRadius="12px"; photo.style.display="block";
-   photoCard.appendChild(photo); $("chatLog").appendChild(photoCard); $("chatLog").scrollTop=$("chatLog").scrollHeight;
-  }
- }catch(err){
-  addBubble(lang==="hi"?"माफ़ कीजिए, जवाब तैयार नहीं हो पाया।":"Sorry, I couldn't prepare a reply.","bot");
- }finally{sendBtn.disabled=false;}
-};
-$("clearChat").onclick=()=>{$("chatLog").innerHTML="";addBubble(words[lang].chatHello,"bot")};
-let lastVoice="";
-$("listenBtn").onclick=()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("voiceResult").textContent=lang==="hi"?"इस ब्राउज़र में आवाज़ पहचान उपलब्ध नहीं है।":"Speech recognition is not supported in this browser.";return}const rec=new SR();rec.lang=lang==="hi"?"hi-IN":"en-IN";rec.interimResults=false;rec.onresult=e=>{lastVoice=e.results[0][0].transcript;$("voiceResult").textContent=lastVoice};rec.onerror=()=>{$("voiceResult").textContent=lang==="hi"?"माइक की अनुमति या इंटरनेट जाँचें।":"Check microphone permission or internet."};rec.start()};
-$("sendVoice").onclick=()=>{if(!lastVoice)return;showView("chatView");$("chatInput").value=lastVoice;$("chatInput").focus()};
-function renderNotes(){const arr=JSON.parse(localStorage.getItem("bajrang_notes")||"[]");$("savedNotes").innerHTML="";arr.forEach((n,i)=>{const d=document.createElement("div");d.className="note";d.textContent=n;const b=document.createElement("button");b.className="secondary";b.textContent=lang==="hi"?"हटाएँ":"Delete";b.onclick=()=>{arr.splice(i,1);localStorage.setItem("bajrang_notes",JSON.stringify(arr));renderNotes()};d.appendChild(document.createElement("br"));d.appendChild(b);$("savedNotes").appendChild(d)})}
-$("saveNote").onclick=()=>{const v=$("noteInput").value.trim();if(!v)return;const arr=JSON.parse(localStorage.getItem("bajrang_notes")||"[]");arr.unshift(v);localStorage.setItem("bajrang_notes",JSON.stringify(arr.slice(0,50)));$("noteInput").value="";renderNotes()};$("clearNote").onclick=()=>{$("noteInput").value=""};
-function renderReminders(){const arr=JSON.parse(localStorage.getItem("bajrang_reminders")||"[]");$("reminderList").innerHTML="";arr.forEach((r,i)=>{const d=document.createElement("div");d.className="note";d.textContent=r.text+" — "+new Date(r.time).toLocaleString();const b=document.createElement("button");b.className="secondary";b.textContent=lang==="hi"?"हटाएँ":"Delete";b.onclick=()=>{arr.splice(i,1);localStorage.setItem("bajrang_reminders",JSON.stringify(arr));renderReminders()};d.appendChild(document.createElement("br"));d.appendChild(b);$("reminderList").appendChild(d)})}
-$("addReminder").onclick=async()=>{const text=$("reminderText").value.trim(),time=new Date($("reminderTime").value).getTime();if(!text||!Number.isFinite(time)||time<=Date.now()){alert(lang==="hi"?"भविष्य का समय और रिमाइंडर लिखें।":"Enter a reminder and a future time.");return}if("Notification"in window&&Notification.permission==="default"){try{await Notification.requestPermission()}catch(e){}}const arr=JSON.parse(localStorage.getItem("bajrang_reminders")||"[]");arr.push({text,time});localStorage.setItem("bajrang_reminders",JSON.stringify(arr));$("reminderText").value="";$("reminderTime").value="";renderReminders();const delay=time-Date.now();if(delay<2147480000)setTimeout(()=>{if("Notification"in window&&Notification.permission==="granted")new Notification("BAJRANG AI",{body:text});else alert("BAJRANG AI: "+text)},delay)};
-$("deviceInfo").textContent=navigator.userAgent.includes("Android")?"Android phone · Chrome/browser":"Browser device";
-$("batteryCheck").onclick=async()=>{if(!navigator.getBattery){$("batteryInfo").textContent=words[lang].batteryUnavailable;return}try{const b=await navigator.getBattery();$("batteryInfo").textContent=Math.round(b.level*100)+"%"+(b.charging?" · Charging":"")}catch(e){$("batteryInfo").textContent=words[lang].batteryUnavailable}};
-applyLang();renderNotes();renderReminders();
-if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click",()=>showView(b.dataset.open)));
+document.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click",()=>showView(b.dataset.nav)));
+if ($("settingsBtn")) $("settingsBtn").addEventListener("click",()=>showView("settingsView"));
+if ($("backHome")) $("backHome").addEventListener("click",()=>showView("homeView"));
+if ($("langBtn")) $("langBtn").addEventListener("click",()=>{
+ lang = lang === "en" ? "hi" : "en";
+ localStorage.setItem("bajrang_lang",lang);
+ $("langBtn").textContent = lang === "en" ? "हिंदी" : "English";
+ document.documentElement.lang = lang === "hi" ? "hi" : "en";
+});
+function addBubble(value,who) {
+ const d=document.createElement("div"); d.className="bubble "+who; d.textContent=value;
+ $("chatLog").appendChild(d); $("chatLog").scrollTop=$("chatLog").scrollHeight;
+}
+function localReply(raw) {
+ const q=String(raw||"").trim(), s=q.toLowerCase();
+ const hi=/[\u0900-\u097f]/.test(q)||lang==="hi";
+ const say=(h,e)=>hi?h:e;
+ if(/^(hi|hello|hey|नमस्ते|नमस्कार|हेलो|हाय)[!. ]*$/i.test(q)) return say("नमस्ते! मैं BAJRANG AI हूँ। बताइए, क्या मदद चाहिए?","Hello! I am BAJRANG AI. How can I help?");
+ if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(s)) return say("BAJRANG AI के Founder और Project Creator Preet Pandey हैं। गाँव: Bramankhedi। ChatGPT (GPT-6) ने AI Development Assistant के रूप में मदद की है।","BAJRANG AI was created by Preet Pandey from Bramankhedi. ChatGPT (GPT-6) assisted as the AI Development Assistant.");
+ if(/(तुम कौन|कौन हो|who are you|your name|तुम्हारा नाम)/i.test(s)) return say("मैं BAJRANG AI हूँ। यह सीमित Offline Smart Chat है, बड़ा Generative AI मॉडल नहीं।","I am BAJRANG AI, a limited offline smart chat, not a full generative AI model.");
+ if(/(समय|टाइम|time|तारीख|date|आज कौन सा दिन)/i.test(s)) return new Date().toLocaleString(hi?"hi-IN":"en-IN");
+ if(/(नोट|notes?)/i.test(s)) return say("नोट सेव करने के लिए Notes सेक्शन खोलें।","Open the Notes section to save a note.");
+ if(/(रिमाइंडर|reminder)/i.test(s)) return say("रिमाइंडर बनाने के लिए Reminders सेक्शन खोलें।","Open the Reminders section to create a reminder.");
+ const m=q.match(/^\s*(-?\d+(?:\.\d+)?)\s*([+\-*/×÷])\s*(-?\d+(?:\.\d+)?)\s*=?\s*$/);
+ if(m){const a=+m[1],b=+m[3],o=m[2];if((o==="÷"||o==="/")&&b===0)return say("शून्य से भाग नहीं कर सकते।","Division by zero is undefined.");const n=o==="+"?a+b:o==="-"?a-b:(o==="*"||o==="×")?a*b:a/b;return say("जवाब: "+n,"Answer: "+n);}
+ if(/(मौसम|weather|समाचार|खबर|news)/i.test(s)) return say("ताज़ा जानकारी के लिए इंटरनेट चाहिए।","Live information requires internet.");
+ return say("मैंने आपका सवाल पढ़ा, लेकिन इसका भरोसेमंद जवाब मेरे Offline ज्ञान में नहीं है।","I read your question, but I don't have a reliable built-in answer for it.");
+}
+if($("chatForm")) $("chatForm").addEventListener("submit",e=>{
+ e.preventDefault(); const v=$("chatInput").value.trim(); if(!v)return;
+ addBubble(v,"user"); $("chatInput").value=""; const answer=localReply(v); addBubble(answer,"bot");
+ if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
+  const d=document.createElement("div");d.className="bubble bot";
+  const img=document.createElement("img");img.src="./founder.jpg";img.alt="BAJRANG AI Founder";img.loading="lazy";img.style.cssText="display:block;width:100%;max-width:180px;height:auto;border-radius:12px";
+  d.appendChild(img);$("chatLog").appendChild(d);
+ }
+});
+if($("clearChat")) $("clearChat").addEventListener("click",()=>{$("chatLog").innerHTML="";addBubble(lang==="hi"?"नमस्ते! मैं BAJRANG AI हूँ।":"Hello! I am BAJRANG AI.","bot");});
+function loadNotes(){const a=JSON.parse(localStorage.getItem("bajrang_notes")||"[]");$("savedNotes").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v;d.addEventListener("click",()=>{if(confirm("Delete this note?")){a.splice(i,1);localStorage.setItem("bajrang_notes",JSON.stringify(a));loadNotes();}});$("savedNotes").appendChild(d);});}
+if($("saveNote")) $("saveNote").addEventListener("click",()=>{const v=$("noteInput").value.trim();if(!v)return;const a=JSON.parse(localStorage.getItem("bajrang_notes")||"[]");a.unshift(v);localStorage.setItem("bajrang_notes",JSON.stringify(a));$("noteInput").value="";loadNotes();});
+if($("clearNote")) $("clearNote").addEventListener("click",()=>{if(confirm("Clear all notes?")){localStorage.removeItem("bajrang_notes");loadNotes();}});
+function loadReminders(){const a=JSON.parse(localStorage.getItem("bajrang_reminders")||"[]");$("reminderList").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v.text+" — "+v.time;d.addEventListener("click",()=>{a.splice(i,1);localStorage.setItem("bajrang_reminders",JSON.stringify(a));loadReminders();});$("reminderList").appendChild(d);});}
+if($("addReminder")) $("addReminder").addEventListener("click",()=>{const t=$("reminderText").value.trim(),when=$("reminderTime").value;if(!t||!when)return;const a=JSON.parse(localStorage.getItem("bajrang_reminders")||"[]");a.push({text:t,time:when});localStorage.setItem("bajrang_reminders",JSON.stringify(a));$("reminderText").value="";$("reminderTime").value="";loadReminders();});
+if($("batteryCheck")) $("batteryCheck").addEventListener("click",async()=>{if(!navigator.getBattery){$("batteryInfo").textContent="Battery information unavailable";return;}try{const b=await navigator.getBattery();$("batteryInfo").textContent=Math.round(b.level*100)+"%"+(b.charging?" · Charging":"");}catch(e){$("batteryInfo").textContent="Battery information unavailable";}});
+if($("deviceInfo")) $("deviceInfo").textContent=navigator.userAgent.includes("Android")?"Android phone · Browser":"Browser device";
+if($("listenBtn")) $("listenBtn").addEventListener("click",()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("voiceResult").textContent="Speech recognition is not supported in this browser.";return;}const rec=new SR();rec.lang=lang==="hi"?"hi-IN":"en-IN";rec.onresult=e=>$("voiceResult").textContent=e.results[0][0].transcript;rec.onerror=()=> $("voiceResult").textContent="Could not recognize speech.";rec.start();});
+if($("sendVoice")) $("sendVoice").addEventListener("click",()=>{const v=$("voiceResult").textContent;if(v&&$("chatInput")){$("chatInput").value=v;showView("chatView");}});
+$("langBtn").textContent=lang==="en"?"हिंदी":"English";
+loadNotes();loadReminders();
+if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
 </script>
 </body>
 </html>
