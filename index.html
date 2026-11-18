@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#101522">
+<meta name="theme-color" content="#080706">
 <meta name="description" content="BAJRANG AI — your personal assistant dashboard.">
 <title>BAJRANG AI — Personal Assistant</title>
 <link rel="manifest" href="./manifest.webmanifest">
@@ -29,6 +29,33 @@ h1{font-size:clamp(21px,5vw,29px);letter-spacing:2px;margin:0}.tag{color:var(--g
 .bottom{position:fixed;bottom:0;left:0;right:0;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom));background:#090e19ed;border-top:1px solid #293952;backdrop-filter:blur(12px);z-index:5}.nav{max-width:650px;margin:auto;display:flex;justify-content:space-around;gap:4px}.nav button{border:0;background:transparent;color:#9eabc0;padding:6px 8px;border-radius:10px;font-size:11px;min-width:56px}.nav button.active{color:var(--gold2);background:#2a2b2b}.nav span{display:block;font-size:19px;margin-bottom:1px}
 footer{text-align:center;color:#74839a;font-size:11px;padding:24px 0 4px}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.app{padding-top:24px}.hero{padding:28px}.tile{min-height:130px}}
+
+/* BAJRANG AI — Royal Black & Gold theme */
+:root{color-scheme:dark;--bg:#080706;--panel:#17130d;--panel2:#211a10;--line:#725522;--gold:#d9ad45;--gold2:#ffe19a;--text:#fff9eb;--muted:#c0b49a;--green:#65d6a0;--red:#f07878}
+body{background:radial-gradient(ellipse at 50% -18%,#493514 0,#171109 35%,#080706 78%);color:var(--text)}
+.logo{background:linear-gradient(145deg,#fff0b5 0%,#d6a33c 48%,#8d611c 100%);color:#160f04;box-shadow:0 8px 30px #e4b84b55;border:1px solid #ffe6a0}
+.tag,.eyebrow{color:var(--gold2)}
+.mini{border-color:#765a26;background:linear-gradient(145deg,#241c10,#120e08);color:#fff0c5}
+.hero{border:1px solid #c49a3d;background:linear-gradient(115deg,#171109 0%,#30220d 58%,#100d08 100%);box-shadow:0 18px 48px #0009, inset 0 1px #ffe3a044}
+.hero:after{color:#f5d27a;text-shadow:0 0 28px #e8b84c}
+.status{border-color:#66501e;background:#261d0d;color:#ffe5a3}
+.dot{background:#dcb64d;box-shadow:0 0 10px #dcb64d}
+.tile,.panel{background:linear-gradient(145deg,#21190e,#100d08);border-color:#57421e;box-shadow:0 9px 26px #0006,inset 0 1px #f6d68b12}
+.tile:hover{border-color:#e0b54d;box-shadow:0 10px 30px #d8a83b22}
+.ico{background:linear-gradient(145deg,#3b2b12,#211707);color:#ffe19a;border:1px solid #75551e}
+.field,.chatlog,.note{background:#0d0a06;border-color:#5c4722;color:#fff6df}
+.field:focus{border-color:#e3b84e;box-shadow:0 0 0 2px #d6a33c22}
+.primary{background:linear-gradient(135deg,#fff0b5,#e0b34e 55%,#a87520);color:#211504;box-shadow:0 5px 16px #d6a33c2c}
+.secondary{background:linear-gradient(145deg,#30230f,#171108);color:#ffe8b0;border:1px solid #80612a}
+.warn{background:#61352a;color:#fff}
+.bot{background:#21190e;border:1px solid #57421e}
+.user{background:#624719;color:#fff5d9}
+.bottom{background:#080706ed;border-top:1px solid #725522}
+.nav button{color:#c0b49a}
+.nav button.active{color:#ffe19a;background:#38290f}
+footer{color:#9f906f}
+@media(hover:hover){.primary:hover,.secondary:hover,.mini:hover{filter:brightness(1.12)}}
+
 </style>
 </head>
 <body>
