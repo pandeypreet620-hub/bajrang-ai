@@ -1,1 +1,19 @@
-{"name":"Bajrang AI","short_name":"Bajrang","start_url":"./","scope":"./","display":"standalone","background_color":"#101827","theme_color":"#101827","description":"पढ़ाई और Farming Simulator 18 के मुफ्त टूल","icons":[{"src":"./icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "BAJRANG AI — Personal Assistant",
+  "short_name": "BAJRANG AI",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090e19",
+  "theme_color": "#101522",
+  "description": "Your bilingual personal assistant dashboard for chat, voice, notes and reminders.",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
