@@ -133,7 +133,7 @@ function localReply(raw) {
  if(/(समय|टाइम|time|तारीख|date|आज कौन सा दिन)/i.test(s)) return new Date().toLocaleString(hi?"hi-IN":"en-IN");
  if(/(नोट|notes?)/i.test(s)) return say("नोट सेव करने के लिए Notes सेक्शन खोलें।","Open the Notes section to save a note.");
  if(/(रिमाइंडर|reminder)/i.test(s)) return say("रिमाइंडर बनाने के लिए Reminders सेक्शन खोलें।","Open the Reminders section to create a reminder.");
- const m=q.match(/^\s*(-?\d+(?:\.\d+)?)\s*([+\-*/×÷])\s*(-?\d+(?:\.\d+)?)\s*=?\s*$/);
+ const m=q.match(/^\s*(-?\d+(?:\.\d+)?)\s*([+\-*\/×÷])\s*(-?\d+(?:\.\d+)?)\s*=?\s*$/);
  if(m){const a=+m[1],b=+m[3],o=m[2];if((o==="÷"||o==="/")&&b===0)return say("शून्य से भाग नहीं कर सकते।","Division by zero is undefined.");const n=o==="+"?a+b:o==="-"?a-b:(o==="*"||o==="×")?a*b:a/b;return say("जवाब: "+n,"Answer: "+n);}
  if(/(मौसम|weather|समाचार|खबर|news)/i.test(s)) return say("ताज़ा जानकारी के लिए इंटरनेट चाहिए।","Live information requires internet.");
  return say("मैंने आपका सवाल पढ़ा, लेकिन इसका भरोसेमंद जवाब मेरे Offline ज्ञान में नहीं है।","I read your question, but I don't have a reliable built-in answer for it.");
