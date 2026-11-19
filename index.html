@@ -59,17 +59,51 @@ footer{color:#9f906f}
 .voice-status{color:var(--muted);font-size:12px;margin-top:10px;min-height:18px}
 @media(hover:hover){.primary:hover,.secondary:hover,.mini:hover{filter:brightness(1.12)}}
 
+
+/* BAJRANG AI — Nature Green dashboard, Design #4 */
+:root{color-scheme:dark;--bg:#07170f;--panel:#102719;--panel2:#173722;--line:#426b42;--gold:#e5bd57;--gold2:#ffe5a0;--text:#f5f8eb;--muted:#c4d5b8;--green:#6ee58b;--red:#f07878}
+body{background:radial-gradient(ellipse at 50% -18%,#326b36 0,#12351f 35%,#07170f 78%);color:var(--text)}
+.app{position:relative}
+.logo{background:linear-gradient(145deg,#fff0b2 0%,#e3b94e 52%,#8a641e 100%);color:#18351c;border:1px solid #ffebaa;box-shadow:0 8px 30px #76d85a55}
+.tag,.eyebrow{color:#f3d98a}
+.mini{border-color:#527d43;background:linear-gradient(145deg,#21452a,#102819);color:#f6f5d9}
+.hero{border:2px solid #9c7432;background:linear-gradient(115deg,rgba(40,75,35,.96),rgba(27,57,30,.95) 45%,rgba(92,58,25,.96)),repeating-linear-gradient(8deg,#6b4824 0 2px,#76532d 2px 5px);box-shadow:0 18px 48px #0008,inset 0 1px #fff2b344}
+.hero:after{content:"🌿";right:14px;top:4px;color:#b5ed88;font-size:70px;opacity:.22;text-shadow:0 0 24px #79df63}
+.status{border-color:#4f8d55;background:#123c25;color:#b9f7b5}
+.dot{background:#7df08b;box-shadow:0 0 10px #7df08b}
+.tile,.panel{background:linear-gradient(145deg,#79552f 0%,#4b351e 9%,#234329 10%,#16351f 100%);border:1px solid #78924d;box-shadow:0 9px 26px #0006,inset 0 1px #f6e1a322}
+.tile:hover{border-color:#e5c45e;box-shadow:0 10px 30px #8ee46b30}
+.ico{background:linear-gradient(145deg,#315d34,#183a24);color:#ffe49a;border:1px solid #78984e}
+.field,.chatlog,.note{background:#0b1d12;border-color:#54794b;color:#f5f8eb}
+.field:focus{border-color:#a6df72;box-shadow:0 0 0 2px #a6df7222}
+.primary{background:linear-gradient(135deg,#fff0b5,#e3b94e 55%,#9b7427);color:#1c321c;box-shadow:0 5px 16px #b4d65a2c}
+.secondary{background:linear-gradient(145deg,#315c35,#183b24);color:#efffe5;border:1px solid #72954c}
+.warn{background:#61352a;color:#fff}
+.bot{background:#183b25;border:1px solid #4d7948}
+.user{background:#66502b;color:#fff5d9}
+.bottom{background:#07170fee;border-top:1px solid #547b43}
+.nav button{color:#c4d5b8}
+.nav button.active{color:#ffe49a;background:#24482b}
+footer{color:#a9c39f}
+.voice-option{color:#e8edc5}
+.voice-option input{accent-color:#81d86c}
+.voice-status{color:var(--muted)}
+.hero-speak{display:inline-flex;align-items:center;justify-content:center;gap:9px;margin-top:16px;padding:12px 20px;border-radius:999px;border:1px solid #f0d47a;background:linear-gradient(135deg,#fff0b5,#d9ad45 55%,#9b7427);color:#1c321c;font-weight:850;box-shadow:0 0 0 5px #b4e77b20,0 0 24px #a9e76b55}
+.hero-speak .mic{font-size:21px}
+.hero h2{color:#fff0b5;text-shadow:0 2px 12px #0008}
+@media(hover:hover){.hero-speak:hover{filter:brightness(1.08);transform:translateY(-1px)}}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header>
- <div class="brand"><div class="logo">B</div><div><h1>BAJRANG AI</h1><div class="tag" data-i18n="subtitle">YOUR PERSONAL ASSISTANT</div></div></div>
+ <div class="brand"><div class="logo" aria-label="BAJRANG AI leaf crown">♛</div><div><h1>BAJRANG AI</h1><div class="tag" data-i18n="subtitle">YOUR PERSONAL ASSISTANT</div></div></div>
  <div class="head-actions"><button class="mini" id="langBtn" aria-label="Change language">हिंदी</button><button class="mini" id="settingsBtn" aria-label="Settings">⚙</button></div>
 </header>
 <main>
 <section id="homeView" class="view active">
- <div class="hero"><div class="eyebrow" data-i18n="welcome">WELCOME TO YOUR SPACE</div><h2 data-i18n="heroTitle">Your day, your assistant.</h2><p data-i18n="heroText">A simple personal dashboard for chat, voice, notes and everyday tools.</p><span class="status"><i class="dot"></i><span data-i18n="ready">Dashboard ready</span></span></div>
+ <div class="hero"><div class="eyebrow" data-i18n="welcome">YOUR AI PARTNER FOR A SMARTER LIFE</div><h2 data-i18n="heroTitle">Hello, Preet Pandey!</h2><p data-i18n="heroText">Stay smart, stay happy — your BAJRANG AI assistant is ready.</p><span class="status"><i class="dot"></i><span data-i18n="ready">System Online</span></span><br><button class="hero-speak" id="heroSpeak" type="button"><span class="mic">🎙</span> Speak Now</button></div>
  <div class="section-head"><h3 data-i18n="quick">Quick access</h3><span class="muted" data-i18n="choose">Choose a tool</span></div>
  <div class="grid">
   <button class="tile" data-open="chatView"><div class="ico">✦</div><b data-i18n="chat">AI Chat</b><small data-i18n="chatDesc">Talk with your assistant</small></button>
@@ -128,6 +162,7 @@ function showView(id) {
 document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click",()=>showView(b.dataset.open)));
 document.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click",()=>showView(b.dataset.nav)));
 if ($("settingsBtn")) $("settingsBtn").addEventListener("click",()=>showView("settingsView"));
+if ($("heroSpeak")) $("heroSpeak").addEventListener("click",()=>{showView("voiceView");if($("listenBtn"))$("listenBtn").click();});
 if ($("backHome")) $("backHome").addEventListener("click",()=>showView("homeView"));
 if ($("langBtn")) $("langBtn").addEventListener("click",()=>{
  lang = lang === "en" ? "hi" : "en";
