@@ -185,7 +185,7 @@ function speakText(text){
  }
  const message=String(text||"").trim(); if(!message)return;
  window.speechSynthesis.cancel();
- const locale=/[\\u0900-\\u097f]/.test(message)||lang==="hi"?"hi-IN":"en-IN";
+ const locale=/[\u0900-\u097f]/.test(message)||lang==="hi"?"hi-IN":"en-IN";
  const utterance=new SpeechSynthesisUtterance(message);
  utterance.lang=locale; utterance.rate=0.96; utterance.pitch=1.05;
  const voice=chooseSpeechVoice(locale); if(voice) utterance.voice=voice;
