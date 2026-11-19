@@ -258,16 +258,18 @@ function splitSpeech(text){
  const clean=String(text||"").replace(/\s+/g," ").trim();
  if(!clean)return [];
  const sentences=clean.match(/[^.!?।]+[.!?।]?/g)||[clean];
- const chunks=[];
+ const chunks=[];let part="";
  for(const sentence of sentences){
-  let part="";
-  for(const word of sentence.trim().split(" ")){
+  const words=sentence.trim().split(" ");
+  for(const word of words){
    if(!word)continue;
-   if((part+" "+word).trim().length>115&&part){chunks.push(part.trim());part=word;}
-   else part=(part+" "+word).trim();
+   const next=(part+" "+word).trim();
+   if(next.length>220&&part){chunks.push(part.trim());part=word;}
+   else part=next;
   }
-  if(part)chunks.push(part.trim());
+  if(part&&/[.!?।]$/.test(sentence.trim())){chunks.push(part.trim());part="";}
  }
+ if(part)chunks.push(part.trim());
  return chunks;
 }
 function speakText(text){
@@ -288,7 +290,7 @@ function speakNextChunk(token){
  if(!item){speechBusy=false;if($("voiceStatus"))$("voiceStatus").textContent="आवाज़ पूरी हुई।";return;}
  speechBusy=true;
  const utterance=new SpeechSynthesisUtterance(item.part);
- utterance.lang=item.locale;utterance.rate=0.88;utterance.pitch=1.0;
+ utterance.lang=item.locale;utterance.rate=0.95;utterance.pitch=1.0;
  if(item.voice)utterance.voice=item.voice;
  utterance.onstart=()=>{if($("voiceStatus"))$("voiceStatus").textContent="BAJRANG AI बोल रहा है…";};
  utterance.onend=()=>{if(token===speechToken)setTimeout(()=>speakNextChunk(token),100);};
