@@ -93,6 +93,42 @@ footer{color:#a9c39f}
 .hero h2{color:#fff0b5;text-shadow:0 2px 12px #0008}
 @media(hover:hover){.hero-speak:hover{filter:brightness(1.08);transform:translateY(-1px)}}
 
+
+/* BAJRANG AI — Founder Edition: Aurora Forest */
+:root{--bg:#06120e;--panel:#10251c;--panel2:#183629;--line:#315c45;--gold:#f0c96b;--gold2:#ffe7a6;--text:#f4f8f1;--muted:#a9c4b2;--green:#8ce5a4}
+body{background:radial-gradient(ellipse at 50% -20%,#2b6846 0,#102d20 36%,#06120e 78%);letter-spacing:.05px}
+.app{max-width:900px;padding:18px 16px 104px}
+header{padding:8px 2px 18px}
+.logo{border-radius:18px;background:linear-gradient(145deg,#fff0bd,#e8bc55 55%,#94651e);box-shadow:0 8px 28px #c99c3c44}
+h1{letter-spacing:2.6px;font-size:clamp(20px,5vw,27px)}
+.tag{letter-spacing:1.6px;font-size:10px}
+.hero{border:1px solid #6c9c70;border-radius:27px;padding:25px 21px;background:radial-gradient(circle at 86% 20%,#3d7650 0,transparent 34%),linear-gradient(135deg,#173d2a,#0d261b 64%,#392c15);box-shadow:0 22px 55px #0007,inset 0 1px #ffffff22;min-height:235px}
+.hero:after{content:"";width:170px;height:170px;border-radius:50%;right:-22px;top:28px;border:1px solid #d6c07755;background:radial-gradient(circle,#b9e89a22 0 28%,#b9e89a08 29% 55%,transparent 56%);box-shadow:0 0 55px #91d78322}
+.hero h2{font-size:clamp(27px,7vw,39px);max-width:560px;line-height:1.12;margin:12px 0 9px}
+.hero p{max-width:480px;color:#d4e5d8}
+.status{border:1px solid #619a69;background:#0b2d1d;color:#c8f5c9}
+.hero-speak{position:relative;z-index:1;margin-top:19px;padding:13px 22px;border-radius:15px;border:1px solid #ffe39a;background:linear-gradient(135deg,#fff0b5,#e1b44d 60%,#a87825);box-shadow:0 8px 24px #d7b34a33;font-size:14px}
+.section-head{margin:25px 2px 13px}
+.section-head h3{font-size:18px;letter-spacing:.2px}
+.grid{gap:12px}
+.tile,.panel{border-radius:20px;background:linear-gradient(145deg,#173a29,#0d2419);border:1px solid #315e43;box-shadow:0 12px 28px #0003,inset 0 1px #ffffff0c}
+.tile{min-height:122px;padding:16px;position:relative;overflow:hidden}
+.tile:after{content:"";position:absolute;inset:auto -25px -45px auto;width:90px;height:90px;border-radius:50%;background:#b2dc7720;filter:blur(2px)}
+.tile:hover{border-color:#d9bd6a;transform:translateY(-2px)}
+.ico{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,#315e3c,#1b3d29);border:1px solid #5b8a58;color:#ffe7a6}
+.tile b{font-size:15px}.tile small{font-size:12px;color:#b4cbb9}
+.panel{padding:18px;margin-top:15px}
+.bottom{background:#06120ef2;border-top:1px solid #315c45;backdrop-filter:blur(16px)}
+.nav{max-width:600px}.nav button{font-size:11px;padding:8px 5px}.nav button.active{background:#1c422c;color:#ffe7a6}
+.field,.chatlog,.note{border-radius:15px;background:#081a12;border-color:#315c45}
+.primary{background:linear-gradient(135deg,#fff0b5,#e0b24b);color:#1a2b1c;border-radius:14px}
+.secondary{background:#1a3c29;border:1px solid #507b54;border-radius:14px}
+.bot{background:#173b29;border-color:#39694a}
+.user{background:#66502b}
+.voice-status{padding:8px 0}
+footer{padding-top:27px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{padding:34px;min-height:265px}.tile{min-height:135px}}
+
 </style>
 </head>
 <body>
@@ -207,29 +243,59 @@ if($("addReminder")) $("addReminder").addEventListener("click",()=>{const t=$("r
 if($("batteryCheck")) $("batteryCheck").addEventListener("click",async()=>{if(!navigator.getBattery){$("batteryInfo").textContent="Battery information unavailable";return;}try{const b=await navigator.getBattery();$("batteryInfo").textContent=Math.round(b.level*100)+"%"+(b.charging?" · Charging":"");}catch(e){$("batteryInfo").textContent="Battery information unavailable";}});
 if($("deviceInfo")) $("deviceInfo").textContent=navigator.userAgent.includes("Android")?"Android phone · Browser":"Browser device";
 let activeRecognition=null;
+
+let speechQueue=[];
+let speechBusy=false;
+let speechToken=0;
 function chooseSpeechVoice(locale){
  const voices=window.speechSynthesis&&window.speechSynthesis.getVoices?window.speechSynthesis.getVoices():[];
- const matching=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith(locale.slice(0,2).toLowerCase()));
- const feminine=matching.find(v=>/(female|zira|heera|veena|priya|aditi|samantha|susan|karen|moira|tessa|google हिन्दी|google hindi)/i.test(v.name));
- return feminine||matching.find(v=>v.default)||matching[0]||null;
+ const prefix=locale.slice(0,2).toLowerCase();
+ const matching=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith(prefix));
+ const preferred=matching.find(v=>/(google.*hindi|heera|veena|priya|aditi|hindi)/i.test(v.name));
+ return preferred||matching.find(v=>v.default)||matching[0]||null;
+}
+function splitSpeech(text){
+ const clean=String(text||"").replace(/\s+/g," ").trim();
+ if(!clean)return [];
+ const sentences=clean.match(/[^.!?।]+[.!?।]?/g)||[clean];
+ const chunks=[];
+ for(const sentence of sentences){
+  let part="";
+  for(const word of sentence.trim().split(" ")){
+   if(!word)continue;
+   if((part+" "+word).trim().length>115&&part){chunks.push(part.trim());part=word;}
+   else part=(part+" "+word).trim();
+  }
+  if(part)chunks.push(part.trim());
+ }
+ return chunks;
 }
 function speakText(text){
  if(!("speechSynthesis" in window)||!("SpeechSynthesisUtterance" in window)){
-  if($("voiceStatus")) $("voiceStatus").textContent="Speech output is not supported in this browser.";
-  return;
+  if($("voiceStatus"))$("voiceStatus").textContent="इस ब्राउज़र में आवाज़ उपलब्ध नहीं है। Chrome में खोलकर देखें।";return;
  }
- const message=String(text||"").trim(); if(!message)return;
- window.speechSynthesis.cancel();
- const locale=/[\u0900-\u097f]/.test(message)||lang==="hi"?"hi-IN":"en-IN";
- const utterance=new SpeechSynthesisUtterance(message);
- utterance.lang=locale; utterance.rate=0.96; utterance.pitch=1.05;
- const voice=chooseSpeechVoice(locale); if(voice) utterance.voice=voice;
- utterance.onstart=()=>{if($("voiceStatus"))$("voiceStatus").textContent="BAJRANG AI is speaking…";};
- utterance.onend=()=>{if($("voiceStatus"))$("voiceStatus").textContent="Voice ready.";};
- utterance.onerror=()=>{if($("voiceStatus"))$("voiceStatus").textContent="Could not play voice. Check your phone's text-to-speech settings.";};
+ const chunks=splitSpeech(text);if(!chunks.length)return;
+ window.speechSynthesis.cancel();speechQueue=[];speechBusy=false;
+ const token=++speechToken;
+ const locale=/[\u0900-\u097f]/.test(String(text))||lang==="hi"?"hi-IN":"en-IN";
+ const voice=chooseSpeechVoice(locale);
+ speechQueue=chunks.map(part=>({part,locale,voice,token}));
+ speakNextChunk(token);
+}
+function speakNextChunk(token){
+ if(token!==speechToken)return;
+ const item=speechQueue.shift();
+ if(!item){speechBusy=false;if($("voiceStatus"))$("voiceStatus").textContent="आवाज़ पूरी हुई।";return;}
+ speechBusy=true;
+ const utterance=new SpeechSynthesisUtterance(item.part);
+ utterance.lang=item.locale;utterance.rate=0.88;utterance.pitch=1.0;
+ if(item.voice)utterance.voice=item.voice;
+ utterance.onstart=()=>{if($("voiceStatus"))$("voiceStatus").textContent="BAJRANG AI बोल रहा है…";};
+ utterance.onend=()=>{if(token===speechToken)setTimeout(()=>speakNextChunk(token),100);};
+ utterance.onerror=()=>{if(token===speechToken){if($("voiceStatus"))$("voiceStatus").textContent="आवाज़ रुक गई। फोन की Text-to-Speech सेटिंग जाँचें।";speechQueue=[];speechBusy=false;}};
  window.speechSynthesis.speak(utterance);
 }
-if("speechSynthesis" in window) window.speechSynthesis.onvoiceschanged=()=>chooseSpeechVoice(lang==="hi"?"hi-IN":"en-IN");
+if("speechSynthesis" in window)window.speechSynthesis.onvoiceschanged=()=>chooseSpeechVoice(lang==="hi"?"hi-IN":"en-IN");
 if($("listenBtn")) $("listenBtn").addEventListener("click",()=>{
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
  if(!SR){$("voiceStatus").textContent="Speech recognition is not supported in this browser. Try opening the site in Chrome.";return;}
