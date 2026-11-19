@@ -54,6 +54,9 @@ body{background:radial-gradient(ellipse at 50% -18%,#493514 0,#171109 35%,#08070
 .nav button{color:#c0b49a}
 .nav button.active{color:#ffe19a;background:#38290f}
 footer{color:#9f906f}
+.voice-option{display:inline-flex;align-items:center;gap:7px;color:var(--gold2);font-size:13px;padding:8px 2px}
+.voice-option input{accent-color:#d9ad45;width:17px;height:17px}
+.voice-status{color:var(--muted);font-size:12px;margin-top:10px;min-height:18px}
 @media(hover:hover){.primary:hover,.secondary:hover,.mini:hover{filter:brightness(1.12)}}
 
 </style>
@@ -83,7 +86,12 @@ footer{color:#9f906f}
  <div class="panel"><h3 data-i18n="chat">AI Chat</h3><p data-i18n="chatNotice">Offline Smart Chat: basic replies run on this device without an API or internet. It is not a full generative AI model.</p><div id="chatLog" class="chatlog" aria-live="polite"><div class="bubble bot" data-i18n="chatHello">Hello! I am BAJRANG AI. Offline Smart Chat is ready for basic questions.</div></div><form id="chatForm"><input id="chatInput" class="field" autocomplete="off" data-placeholder="typeMessage" placeholder="Type a message…"><div class="actions"><button class="primary" type="submit" data-i18n="send">Send</button><button class="secondary" type="button" id="clearChat" data-i18n="clear">Clear</button></div></form></div>
 </section>
 <section id="voiceView" class="view">
- <div class="panel"><h3 data-i18n="voice">Voice Assistant</h3><p data-i18n="voiceNotice">Tap the microphone and speak. Speech recognition depends on browser support and may need internet.</p><button class="primary" id="listenBtn">🎙 <span data-i18n="startListening">Start listening</span></button><div id="voiceResult" class="note" data-i18n="voiceIdle">Your spoken words will appear here.</div><button class="secondary" id="sendVoice" data-i18n="sendToChat">Send to chat</button></div>
+ <div class="panel"><h3 data-i18n="voice">Voice Assistant</h3><p data-i18n="voiceNotice">Tap the microphone and speak. Speech recognition depends on browser support and may need internet.</p>
+  <div class="actions"><button class="primary" id="listenBtn">🎙 <span data-i18n="startListening">Start listening</span></button><button class="secondary" id="stopVoiceBtn" type="button">■ Stop voice</button></div>
+  <div id="voiceResult" class="note" data-i18n="voiceIdle">Your spoken words will appear here.</div>
+  <div class="actions"><button class="secondary" id="sendVoice" data-i18n="sendToChat">Send to chat</button><label class="voice-option"><input type="checkbox" id="speakReplies" checked> <span>🔊 Speak AI replies</span></label></div>
+  <div id="voiceStatus" class="voice-status" aria-live="polite">Voice ready. Your browser's available voice will be used.</div>
+ </div>
 </section>
 <section id="notesView" class="view">
  <div class="panel"><h3 data-i18n="notes">Notes</h3><p data-i18n="notesNotice">Notes stay in this browser on this device. Clearing browser data may erase them.</p><textarea id="noteInput" class="field" rows="5" data-placeholder="writeNote" placeholder="Write a note…"></textarea><div class="actions"><button class="primary" id="saveNote" data-i18n="save">Save note</button><button class="secondary" id="clearNote" data-i18n="clear">Clear</button></div><div id="savedNotes"></div></div>
@@ -95,7 +103,7 @@ footer{color:#9f906f}
  <div class="panel"><h3 data-i18n="tools">Phone tools</h3><p data-i18n="toolsNotice">These are safe shortcuts and information only. A website cannot silently control all Android settings.</p><div class="note"><b data-i18n="device">Device</b><div id="deviceInfo">Android browser</div></div><div class="note"><b data-i18n="battery">Battery</b><div id="batteryInfo" data-i18n="batteryUnavailable">Battery status is not available in this browser.</div></div><button class="secondary" id="batteryCheck" data-i18n="checkBattery">Check battery</button></div>
 </section>
 <section id="aboutView" class="view">
- <div class="panel"><h3 data-i18n="about">About BAJRANG</h3><p data-i18n="aboutText">BAJRANG AI is your personal assistant project. This is the first dashboard release.</p><div class="note"><b>Founder / संस्थापक</b><div>Preet Pandey</div></div><div class="note"><b>Village / गाँव</b><div>Bramankhedi</div></div><div class="note"><b>AI Development Assistant / AI विकास सहायक</b><div>ChatGPT (GPT-6)</div></div><div class="note"><b>Version</b><div>1.1 — Offline Smart Chat</div></div><div class="note"><b data-i18n="privacy">Privacy</b><div data-i18n="privacyText">Notes and reminders are stored locally in this browser. Do not save passwords or sensitive information.</div></div><div class="note"><b data-i18n="nextStep">Next step</b><div data-i18n="nextText">Improve offline chat and add approved Android features.</div></div></div>
+ <div class="panel"><h3 data-i18n="about">About BAJRANG</h3><p data-i18n="aboutText">BAJRANG AI is your personal assistant project. This is the first dashboard release.</p><div class="note"><b>Founder / संस्थापक</b><div>Preet Pandey</div></div><div class="note"><b>Village / गाँव</b><div>Bramankhedi</div></div><div class="note"><b>AI Development Assistant / AI विकास सहायक</b><div>ChatGPT (GPT-6)</div></div><div class="note"><b>Version</b><div>1.2 — Voice Assistant</div></div><div class="note"><b data-i18n="privacy">Privacy</b><div data-i18n="privacyText">Notes and reminders are stored locally in this browser. Do not save passwords or sensitive information.</div></div><div class="note"><b data-i18n="nextStep">Next step</b><div data-i18n="nextText">Improve offline chat and add approved Android features.</div></div></div>
 </section>
 <section id="settingsView" class="view"><div class="panel"><h3 data-i18n="settings">Settings</h3><p data-i18n="settingsText">Choose your language from the top button. More settings will be added later.</p><button class="secondary" id="backHome" data-i18n="backHome">Back to dashboard</button></div></section>
 </main>
@@ -148,7 +156,7 @@ function localReply(raw) {
 }
 if($("chatForm")) $("chatForm").addEventListener("submit",e=>{
  e.preventDefault(); const v=$("chatInput").value.trim(); if(!v)return;
- addBubble(v,"user"); $("chatInput").value=""; const answer=localReply(v); addBubble(answer,"bot");
+ addBubble(v,"user"); $("chatInput").value=""; const answer=localReply(v); addBubble(answer,"bot"); if($("speakReplies") && $("speakReplies").checked) speakText(answer);
  if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
   const d=document.createElement("div");d.className="bubble bot";
   const img=document.createElement("img");img.src="./founder.jpg";img.alt="BAJRANG AI Founder";img.loading="lazy";img.style.cssText="display:block;width:100%;max-width:180px;height:auto;border-radius:12px";
@@ -163,8 +171,52 @@ function loadReminders(){const a=readStoredList("bajrang_reminders");$("reminder
 if($("addReminder")) $("addReminder").addEventListener("click",()=>{const t=$("reminderText").value.trim(),when=$("reminderTime").value;if(!t||!when)return;const a=JSON.parse(safeStorage.getItem("bajrang_reminders")||"[]");a.push({text:t,time:when});safeStorage.setItem("bajrang_reminders",JSON.stringify(a));$("reminderText").value="";$("reminderTime").value="";loadReminders();});
 if($("batteryCheck")) $("batteryCheck").addEventListener("click",async()=>{if(!navigator.getBattery){$("batteryInfo").textContent="Battery information unavailable";return;}try{const b=await navigator.getBattery();$("batteryInfo").textContent=Math.round(b.level*100)+"%"+(b.charging?" · Charging":"");}catch(e){$("batteryInfo").textContent="Battery information unavailable";}});
 if($("deviceInfo")) $("deviceInfo").textContent=navigator.userAgent.includes("Android")?"Android phone · Browser":"Browser device";
-if($("listenBtn")) $("listenBtn").addEventListener("click",()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("voiceResult").textContent="Speech recognition is not supported in this browser.";return;}const rec=new SR();rec.lang=lang==="hi"?"hi-IN":"en-IN";rec.onresult=e=>$("voiceResult").textContent=e.results[0][0].transcript;rec.onerror=()=> $("voiceResult").textContent="Could not recognize speech.";rec.start();});
-if($("sendVoice")) $("sendVoice").addEventListener("click",()=>{const v=$("voiceResult").textContent;if(v&&$("chatInput")){$("chatInput").value=v;showView("chatView");}});
+let activeRecognition=null;
+function chooseSpeechVoice(locale){
+ const voices=window.speechSynthesis&&window.speechSynthesis.getVoices?window.speechSynthesis.getVoices():[];
+ const matching=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith(locale.slice(0,2).toLowerCase()));
+ const feminine=matching.find(v=>/(female|zira|heera|veena|priya|aditi|samantha|susan|karen|moira|tessa|google हिन्दी|google hindi)/i.test(v.name));
+ return feminine||matching.find(v=>v.default)||matching[0]||null;
+}
+function speakText(text){
+ if(!("speechSynthesis" in window)||!("SpeechSynthesisUtterance" in window)){
+  if($("voiceStatus")) $("voiceStatus").textContent="Speech output is not supported in this browser.";
+  return;
+ }
+ const message=String(text||"").trim(); if(!message)return;
+ window.speechSynthesis.cancel();
+ const locale=/[\\u0900-\\u097f]/.test(message)||lang==="hi"?"hi-IN":"en-IN";
+ const utterance=new SpeechSynthesisUtterance(message);
+ utterance.lang=locale; utterance.rate=0.96; utterance.pitch=1.05;
+ const voice=chooseSpeechVoice(locale); if(voice) utterance.voice=voice;
+ utterance.onstart=()=>{if($("voiceStatus"))$("voiceStatus").textContent="BAJRANG AI is speaking…";};
+ utterance.onend=()=>{if($("voiceStatus"))$("voiceStatus").textContent="Voice ready.";};
+ utterance.onerror=()=>{if($("voiceStatus"))$("voiceStatus").textContent="Could not play voice. Check your phone's text-to-speech settings.";};
+ window.speechSynthesis.speak(utterance);
+}
+if("speechSynthesis" in window) window.speechSynthesis.onvoiceschanged=()=>chooseSpeechVoice(lang==="hi"?"hi-IN":"en-IN");
+if($("listenBtn")) $("listenBtn").addEventListener("click",()=>{
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){$("voiceStatus").textContent="Speech recognition is not supported in this browser. Try opening the site in Chrome.";return;}
+ if(activeRecognition){activeRecognition.stop();activeRecognition=null;}
+ const rec=new SR(); activeRecognition=rec; rec.lang=lang==="hi"?"hi-IN":"en-IN"; rec.interimResults=false; rec.maxAlternatives=1;
+ rec.onstart=()=>{$("voiceStatus").textContent="Listening… Speak now.";};
+ rec.onresult=e=>{$("voiceResult").textContent=e.results[0][0].transcript;$("voiceStatus").textContent="Voice captured. Tap Send to chat to get an answer.";};
+ rec.onerror=()=>{$("voiceStatus").textContent="Could not recognize speech. Check microphone permission and try again.";};
+ rec.onend=()=>{if(activeRecognition===rec)activeRecognition=null;};
+ try{rec.start();}catch(e){$("voiceStatus").textContent="Microphone could not start. Please try again.";}
+});
+if($("stopVoiceBtn")) $("stopVoiceBtn").addEventListener("click",()=>{
+ if(activeRecognition){activeRecognition.stop();activeRecognition=null;}
+ if("speechSynthesis" in window)window.speechSynthesis.cancel();
+ $("voiceStatus").textContent="Voice stopped.";
+});
+if($("sendVoice")) $("sendVoice").addEventListener("click",()=>{
+ const v=$("voiceResult").textContent.trim();
+ if(!v||v==="Your spoken words will appear here."){$("voiceStatus").textContent="First tap the microphone and speak.";return;}
+ $("chatInput").value=v; showView("chatView");
+ $("chatForm").dispatchEvent(new Event("submit",{bubbles:true,cancelable:true}));
+});
 $("langBtn").textContent=lang==="en"?"हिंदी":"English";
 loadNotes();loadReminders();
 if("serviceWorker" in navigator) window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
