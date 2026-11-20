@@ -212,7 +212,7 @@ footer{color:#9f906f}
  <div class="panel"><h3 data-i18n="today">Your personal space</h3><p data-i18n="localInfo">This first dashboard version works in your browser. Notes are stored on this device only.</p></div>
 </section>
 <section id="chatView" class="view">
- <div class="panel"><h3 data-i18n="chat">AI Chat</h3><p data-i18n="chatNotice">Offline Smart Chat: basic replies run on this device without an API or internet. It is not a full generative AI model.</p><div id="chatLog" class="chatlog" aria-live="polite"><div class="bubble bot" data-i18n="chatHello">Hello! I am BAJRANG AI. Offline Smart Chat is ready for basic questions.</div></div><form id="chatForm"><input id="chatInput" class="field" autocomplete="off" data-placeholder="typeMessage" placeholder="Type a message…"><div class="actions"><button class="primary" type="submit" data-i18n="send">Send</button><button class="secondary" type="button" id="clearChat" data-i18n="clear">Clear</button></div></form></div>
+ <div class="panel"><h3 data-i18n="chat">AI Chat</h3><p data-i18n="chatNotice">Connected to BAJRANG AI online. Ask a question and Gemini will reply.</p><div id="chatLog" class="chatlog" aria-live="polite"><div class="bubble bot" data-i18n="chatHello">Hello! I am BAJRANG AI. Online AI chat is ready.</div></div><form id="chatForm"><input id="chatInput" class="field" autocomplete="off" data-placeholder="typeMessage" placeholder="Type a message…"><div class="actions"><button class="primary" type="submit" data-i18n="send">Send</button><button class="secondary" type="button" id="clearChat" data-i18n="clear">Clear</button></div></form></div>
 </section>
 <section id="voiceView" class="view">
  <div class="panel"><h3 data-i18n="voice">Voice Assistant</h3><p data-i18n="voiceNotice">Tap the microphone and speak. Speech recognition depends on browser support and may need internet.</p>
@@ -284,16 +284,44 @@ function localReply(raw) {
  if(/(मौसम|weather|समाचार|खबर|news)/i.test(s)) return say("ताज़ा जानकारी के लिए इंटरनेट चाहिए।","Live information requires internet.");
  return say("मैंने आपका सवाल पढ़ा, लेकिन इसका भरोसेमंद जवाब मेरे Offline ज्ञान में नहीं है।","I read your question, but I don't have a reliable built-in answer for it.");
 }
-if($("chatForm")) $("chatForm").addEventListener("submit",e=>{
- e.preventDefault(); const v=$("chatInput").value.trim(); if(!v)return;
- addBubble(v,"user"); $("chatInput").value=""; const answer=localReply(v); addBubble(answer,"bot"); if($("speakReplies") && $("speakReplies").checked) speakText(answer);
- if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
-  const d=document.createElement("div");d.className="bubble bot";
-  const img=document.createElement("img");img.src="./founder.jpg";img.alt="BAJRANG AI Founder";img.loading="lazy";img.style.cssText="display:block;width:100%;max-width:180px;height:auto;border-radius:12px";
-  d.appendChild(img);$("chatLog").appendChild(d);
+const BAJRANG_API_URL="https://bajrang-ai.pandeypreet620.workers.dev/chat";
+let chatHistory=[];
+async function sendToBajrangAI(message){
+ const response=await fetch(BAJRANG_API_URL,{
+  method:"POST",
+  headers:{"Content-Type":"application/json"},
+  body:JSON.stringify({messages:[...chatHistory,{role:"user",content:message}].slice(-12)})
+ });
+ let data={};
+ try{data=await response.json();}catch(e){throw new Error("AI server returned an invalid response.");}
+ if(!response.ok)throw new Error(data.error||"AI server request failed ("+response.status+").");
+ if(typeof data.answer!=="string"||!data.answer.trim())throw new Error("AI server returned an empty answer.");
+ return data.answer.trim();
+}
+if($("chatForm")) $("chatForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const input=$("chatInput"),sendButton=$("chatForm").querySelector('button[type="submit"]');
+ const v=input.value.trim();if(!v||sendButton.disabled)return;
+ addBubble(v,"user");input.value="";sendButton.disabled=true;
+ const pending=document.createElement("div");pending.className="bubble bot";pending.textContent=lang==="hi"?"BAJRANG AI सोच रहा है…":"BAJRANG AI is thinking…";
+ $("chatLog").appendChild(pending);$("chatLog").scrollTop=$("chatLog").scrollHeight;
+ try{
+  const answer=await sendToBajrangAI(v);
+  chatHistory.push({role:"user",content:v},{role:"assistant",content:answer});
+  pending.textContent=answer;
+  if($("speakReplies")&&$("speakReplies").checked)speakText(answer);
+  if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
+   const d=document.createElement("div");d.className="bubble bot";
+   const img=document.createElement("img");img.src="./founder.jpg";img.alt="BAJRANG AI Founder";img.loading="lazy";img.style.cssText="display:block;width:100%;max-width:180px;height:auto;border-radius:12px";
+   d.appendChild(img);$("chatLog").appendChild(d);
+  }
+ }catch(error){
+  pending.textContent=(lang==="hi"?"कनेक्शन में समस्या: ":"Connection error: ")+(error&&error.message?error.message:"कृपया फिर कोशिश करें।");
+ }finally{
+  sendButton.disabled=false;input.focus();$("chatLog").scrollTop=$("chatLog").scrollHeight;
  }
 });
-if($("clearChat")) $("clearChat").addEventListener("click",()=>{$("chatLog").innerHTML="";addBubble(lang==="hi"?"नमस्ते! मैं BAJRANG AI हूँ।":"Hello! I am BAJRANG AI.","bot");});
+if($("clearChat")) $("clearChat").addEventListener("click",()=>{chatHistory=[];$("chatLog").innerHTML="";addBubble(lang==="hi"?"नमस्ते! मैं BAJRANG AI हूँ।":"Hello! I am BAJRANG AI.","bot");});
 function loadNotes(){const a=readStoredList("bajrang_notes");$("savedNotes").innerHTML="";a.forEach((v,i)=>{const d=document.createElement("div");d.className="note";d.textContent=v;d.addEventListener("click",()=>{if(confirm("Delete this note?")){a.splice(i,1);safeStorage.setItem("bajrang_notes",JSON.stringify(a));loadNotes();}});$("savedNotes").appendChild(d);});}
 if($("saveNote")) $("saveNote").addEventListener("click",()=>{const v=$("noteInput").value.trim();if(!v)return;const a=JSON.parse(safeStorage.getItem("bajrang_notes")||"[]");a.unshift(v);safeStorage.setItem("bajrang_notes",JSON.stringify(a));$("noteInput").value="";loadNotes();});
 if($("clearNote")) $("clearNote").addEventListener("click",()=>{if(confirm("Clear all notes?")){safeStorage.removeItem("bajrang_notes");loadNotes();}});
