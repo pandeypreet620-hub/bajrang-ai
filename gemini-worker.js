@@ -99,11 +99,16 @@ export default {
 
       const result = await apiResponse.json();
       if (!apiResponse.ok) {
-        // Do not return provider details or secrets to the public client.
+        // Log provider diagnostics for the owner; never log the API key.
+        console.error("Gemini API request failed", {
+          httpStatus: apiResponse.status,
+          providerStatus: result.error?.status || "unknown",
+          providerMessage: result.error?.message || "No provider message"
+        });
         return json({
           error: apiResponse.status === 429
             ? "AI usage limit reached. Please try again later."
-            : "The AI service could not complete the request."
+            : "Gemini API error (HTTP " + apiResponse.status + ")."
         }, apiResponse.status === 429 ? 429 : 502, corsOrigin);
       }
 
@@ -116,7 +121,8 @@ export default {
         return json({ error: "The AI returned an empty response." }, 502, corsOrigin);
       }
       return json({ answer }, 200, corsOrigin);
-    } catch {
+    } catch (error) {
+      console.error("Gemini Worker request exception", error?.name || "Error", error?.message || "Unknown error");
       return json({ error: "Could not reach the AI service. Please try again." }, 502, corsOrigin);
     }
   }
