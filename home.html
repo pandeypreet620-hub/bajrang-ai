@@ -237,7 +237,36 @@ footer{color:#a8c29d}
 @media(max-width:380px){.app{padding-left:10px;padding-right:10px}.hero{padding:20px 13px;min-height:286px}.hero-speak{width:106px;height:106px}.lux-status{padding:10px 5px;gap:3px}.lux-status-item b{font-size:10px}.lux-status-item span{font-size:9px}.tile{padding:12px;min-height:116px}}
 @media(min-width:650px){.app{padding-top:22px}.hero{min-height:330px;padding:30px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.tile{min-height:138px}}
 
-\n/* Founder profile details */\n.founder-profile{padding:16px;border-color:#b18a3b;background:linear-gradient(145deg,#19452a,#102d1d 62%,#2b2112)}\n.founder-name{font-size:20px;font-weight:850;color:#ffe7a0;margin:7px 0}\n.founder-bio{font-size:13px;line-height:1.65;color:#e1ead8;margin:7px 0 0}\n</style>
+\n/* Founder profile details */\n.founder-profile{padding:16px;border-color:#b18a3b;background:linear-gradient(145deg,#19452a,#102d1d 62%,#2b2112)}\n.founder-name{font-size:20px;font-weight:850;color:#ffe7a0;margin:7px 0}\n.founder-bio{font-size:13px;line-height:1.65;color:#e1ead8;margin:7px 0 0}\n
+/* BAJRANG AI — Black Edition / conversational AI home */
+:root{color-scheme:dark;--bg:#050505;--panel:#101010;--panel2:#17130c;--line:#332714;--gold:#d7aa45;--gold2:#ffe2a0;--text:#f7f4ed;--muted:#a9a39a;--green:#65d6a0}
+html,body{background:#050505!important;color:var(--text)}body{background:radial-gradient(ellipse at 50% -20%,#30220c 0,#0c0a07 36%,#050505 78%)!important}
+.app{max-width:980px;padding:14px 14px 100px}header{padding:8px 2px 18px;border-bottom:1px solid #302411;margin-bottom:18px}
+.logo{background:linear-gradient(145deg,#fff0b5,#d6a33c 52%,#805718)!important;color:#160f04!important;border:1px solid #ffe6a0;box-shadow:0 0 24px #d6a33c55}
+h1{color:#ffe3a0;letter-spacing:2px;text-shadow:0 0 18px #d6a33c44}.tag,.eyebrow{color:#d8b76d}
+.mini{background:#11100d!important;border:1px solid #5b4724!important;color:#ffe7b0!important}
+.hero{border:1px solid #725522!important;border-radius:25px!important;background:radial-gradient(circle at 50% 0%,#30220e 0,transparent 55%),linear-gradient(145deg,#15120c,#080808 72%)!important;box-shadow:0 18px 50px #000,inset 0 1px #ffe3a022!important;text-align:center!important;padding:24px 18px!important;min-height:0!important}
+.hero:after{content:"";position:absolute;width:220px;height:220px;left:calc(50% - 110px);right:auto;top:115px;border:1px solid #d8ad4b33;border-radius:50%;background:radial-gradient(circle,#e6b84b12 0 30%,transparent 65%);box-shadow:0 0 60px #d6a33c20;pointer-events:none}
+.hero .eyebrow,.hero h2,.hero p,.hero .status,.hero-speak{position:relative;z-index:1}.hero h2{font-size:clamp(26px,7vw,38px)!important;color:#fff0c6!important;margin:12px 0 8px!important}.hero p{color:#c9c1b3!important;margin:0 auto 14px!important}
+.status{background:#151108!important;border:1px solid #66501e!important;color:#ffe5a3!important}.dot{background:#dcb64d!important;box-shadow:0 0 10px #dcb64d!important}
+.hero-speak{display:inline-flex!important;align-items:center;justify-content:center;gap:9px;margin-top:18px!important;padding:12px 22px!important;border-radius:999px!important;background:linear-gradient(135deg,#fff0b5,#d9ad45 55%,#9b7427)!important;color:#211504!important;border:1px solid #ffe6a0!important;box-shadow:0 0 0 5px #d9ad4518,0 0 26px #d9ad4544!important;font-weight:850}.hero-speak .mic{font-size:21px}
+.ai-orb{position:relative;z-index:1;width:126px;height:126px;margin:19px auto 8px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 28%,#fff7d4,#d6a33c 12%,#201707 34%,#050505 68%);border:2px solid #e8bd5d;box-shadow:0 0 0 7px #d6a33c18,0 0 35px #d6a33c55,inset 0 0 24px #e7b94a55;animation:aiGlow 3s ease-in-out infinite}
+.ai-orb:before,.ai-orb:after{content:"";position:absolute;border:1px solid #e6bd664c;border-radius:50%;inset:-12px;transform:rotateX(68deg)}.ai-orb:after{inset:-20px;transform:rotateY(68deg)}.ai-orb span{font-size:43px;color:#ffe5a0;text-shadow:0 0 18px #e5b74d}
+@keyframes aiGlow{50%{box-shadow:0 0 0 11px #d6a33c20,0 0 48px #d6a33c77,inset 0 0 30px #e7b94a77}}
+.home-chat{margin:16px 0 0;padding:14px;border:1px solid #59431f;border-radius:20px;background:linear-gradient(145deg,#17130c,#090909);box-shadow:0 12px 35px #0008}.home-chat label{display:block;color:#f1d58f;font-weight:700;margin:0 0 9px}
+.home-chat-row{display:flex;gap:8px;align-items:center}.home-chat input{min-width:0;flex:1;background:#080808;border:1px solid #554321;border-radius:14px;color:#fff4dc;padding:14px;outline:none}.home-chat input:focus{border-color:#d7aa45;box-shadow:0 0 0 2px #d7aa4522}.home-chat button{border:0;border-radius:13px;padding:13px 17px;background:linear-gradient(135deg,#fff0b5,#d7aa45);color:#1c1406;font-weight:900}
+.prompt-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.prompt-chips button{background:#100e0a;border:1px solid #49391c;color:#d9c28e;border-radius:999px;padding:8px 11px;font-size:12px}
+.ai-note{display:flex;align-items:center;gap:10px;margin:15px 2px;color:#aaa18e;font-size:12px}.ai-note i{width:7px;height:7px;background:#62d69b;border-radius:50%;box-shadow:0 0 9px #62d69b}
+.home-section-title{margin:24px 2px 10px;color:#e9cf91;font-size:15px}.home-links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.home-link{display:flex;align-items:center;gap:11px;padding:13px;border-radius:15px;border:1px solid #382b18;background:linear-gradient(145deg,#17130d,#0a0a0a);color:#f6e8c7;text-align:left}.home-link span{font-size:21px;color:#e4ba58}.home-link b{font-size:13px}
+.view{animation:fadeIn .2s ease}@keyframes fadeIn{from{opacity:.65;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tile,.panel{background:linear-gradient(145deg,#17130d,#0a0a0a)!important;border:1px solid #49391e!important;border-radius:18px!important;color:var(--text)!important}.ico{background:#241b0d!important;border:1px solid #6a5124!important;color:#ffe19a!important}
+.field,.chatlog,.note{background:#080808!important;border-color:#554321!important;color:#fff4dc!important}.field:focus{border-color:#d7aa45!important}
+.primary{background:linear-gradient(135deg,#fff0b5,#d7aa45 60%,#9b7427)!important;color:#211504!important}.secondary{background:#17130d!important;border:1px solid #765a26!important;color:#ffe8b0!important}.bot{background:#1b160d!important;border:1px solid #554321!important}.user{background:#60471a!important;color:#fff4dc!important}
+.bottom{background:#050505f2!important;border-top:1px solid #49391e!important;backdrop-filter:blur(16px)}.nav button{color:#a99d83!important}.nav button.active{color:#ffe19a!important;background:#2b200e!important}.section-head h3{color:#f0d48e}footer{color:#83765e}
+@media(min-width:650px){.home-links{grid-template-columns:repeat(4,minmax(0,1fr))}.hero{padding:30px!important}.ai-orb{width:145px;height:145px}}
+@media(max-width:420px){.home-chat-row{align-items:stretch}.home-chat button{padding:11px 13px}.app{padding-left:11px;padding-right:11px}}
+
+</style>
 </head>
 <body>
 <div class="app">
@@ -247,20 +276,9 @@ footer{color:#a8c29d}
 </header>
 <main>
 <section id="homeView" class="view active">
- <div class="hero"><div class="eyebrow" data-i18n="welcome">YOUR AI PARTNER FOR A SMARTER LIFE</div><h2 data-i18n="heroTitle">Hello, Preet Pandey!</h2><p data-i18n="heroText">Stay smart, stay happy — your BAJRANG AI assistant is ready.</p><span class="status"><i class="dot"></i><span data-i18n="ready">System Online</span></span><br><button class="hero-speak" id="heroSpeak" type="button"><span class="mic">🎙</span> Speak Now</button></div>
-
- <div class="lux-status" aria-label="BAJRANG AI features"><div class="lux-status-item"><b>🎙 Voice Assistant</b><span>Speak naturally</span></div><div class="lux-status-item"><b>🌐 Hindi + English</b><span>Two-language support</span></div><div class="lux-status-item"><b>✦ AI Chat</b><span>Online assistant</span></div></div>
- <div class="section-head"><h3 data-i18n="quick">Quick access</h3><span class="muted" data-i18n="choose">Choose a tool</span></div>
- <div class="grid">
-  <button class="tile" data-open="chatView"><div class="ico">✦</div><b data-i18n="chat">AI Chat</b><small data-i18n="chatDesc">Talk with your assistant</small></button>
-  <button class="tile" data-open="voiceView"><div class="ico">🎙</div><b data-i18n="voice">Voice Assistant</b><small data-i18n="voiceDesc">Speak your command</small></button>
-  <button class="tile" data-open="notesView"><div class="ico">📝</div><b data-i18n="notes">Notes</b><small data-i18n="notesDesc">Save ideas on this phone</small></button>
-  <button class="tile" data-open="remindersView"><div class="ico">⏰</div><b data-i18n="reminders">Reminders</b><small data-i18n="remindersDesc">Keep track of tasks</small></button>
-  <button class="tile" data-open="toolsView"><div class="ico">🧰</div><b data-i18n="tools">Phone tools</b><small data-i18n="toolsDesc">Useful device shortcuts</small></button>
-  <button class="tile" type="button" onclick="location.href='./gk.html'"><div class="ico">📚</div><b>General Knowledge</b><small>महत्वपूर्ण GK प्रश्न और उत्तर</small></button>
-  <button class="tile" data-open="aboutView"><div class="ico">ⓘ</div><b data-i18n="about">About BAJRANG</b><small data-i18n="aboutDesc">Status and privacy</small></button>
- </div>
- <div class="panel"><h3 data-i18n="today">Your personal space</h3><p data-i18n="localInfo">This first dashboard version works in your browser. Notes are stored on this device only.</p></div>
+ <div class="hero"><div class="eyebrow">YOUR PERSONAL AI SPACE</div><h2>Welcome back, Preet.</h2><p>Ask anything. Think freely. Let’s get things done.</p><span class="status"><i class="dot"></i><span>BAJRANG AI assistant</span></span><div class="ai-orb" aria-label="BAJRANG AI assistant"><span>✦</span></div><button class="hero-speak" id="heroSpeak" type="button"><span class="mic">🎙</span> Talk to BAJRANG AI</button></div>
+ <div class="home-chat"><label for="homePrompt">What would you like to know?</label><form class="home-chat-row" id="homePromptForm"><input id="homePrompt" autocomplete="off" placeholder="Message BAJRANG AI..." aria-label="Message BAJRANG AI"><button type="submit" aria-label="Send message">➤</button></form><div class="prompt-chips"><button type="button" data-prompt="Explain this simply">Explain simply</button><button type="button" data-prompt="Help me write something">Help me write</button><button type="button" data-prompt="Give me ideas">Give me ideas</button></div></div>
+ <div class="ai-note"><i></i> Your AI workspace · Chat in Hindi or English</div><h3 class="home-section-title">Your workspace</h3><div class="home-links"><button class="home-link" type="button" data-open="chatView"><span>✦</span><b>AI Chat</b></button><button class="home-link" type="button" data-open="voiceView"><span>🎙</span><b>Voice Assistant</b></button><button class="home-link" type="button" data-open="notesView"><span>▤</span><b>Notes</b></button><button class="home-link" type="button" data-open="remindersView"><span>◷</span><b>Reminders</b></button></div>
 </section>
 <section id="chatView" class="view">
  <div class="panel"><h3 data-i18n="chat">AI Chat</h3><p data-i18n="chatNotice">Connected to BAJRANG AI online. Ask a question and Gemini will reply.</p><div id="chatLog" class="chatlog" aria-live="polite"><div class="bubble bot" data-i18n="chatHello">Hello! I am BAJRANG AI. Online AI chat is ready.</div></div><form id="chatForm"><input id="chatInput" class="field" autocomplete="off" data-placeholder="typeMessage" placeholder="Type a message…"><div class="actions"><button class="primary" type="submit" data-i18n="send">Send</button><button class="secondary" type="button" id="clearChat" data-i18n="clear">Clear</button></div></form></div>
@@ -294,9 +312,9 @@ footer{color:#a8c29d}
 const $ = id => document.getElementById(id);
 // Safe storage: some in-app browsers block localStorage and can stop all page scripts.
 const safeStorage = {
- getItem(key){try{return window.localStorage ? window.safeStorage.getItem(key) : null;}catch(e){return null;}},
- setItem(key,value){try{if(window.localStorage)window.safeStorage.setItem(key,value);}catch(e){}},
- removeItem(key){try{if(window.localStorage)window.safeStorage.removeItem(key);}catch(e){}}
+ getItem(key){try{return window.localStorage ? window.localStorage.getItem(key) : null;}catch(e){return null;}},
+ setItem(key,value){try{if(window.localStorage)window.localStorage.setItem(key,value);}catch(e){}},
+ removeItem(key){try{if(window.localStorage)window.localStorage.removeItem(key);}catch(e){}}
 };
 function readStoredList(key){try{const value=JSON.parse(safeStorage.getItem(key)||"[]");return Array.isArray(value)?value:[];}catch(e){return [];}}
 let lang = safeStorage.getItem("bajrang_lang") || "en";
@@ -307,6 +325,8 @@ function showView(id) {
 }
 document.querySelectorAll("[data-open]").forEach(b => b.addEventListener("click",()=>showView(b.dataset.open)));
 document.querySelectorAll("[data-nav]").forEach(b => b.addEventListener("click",()=>showView(b.dataset.nav)));
+if($("homePromptForm")) $("homePromptForm").addEventListener("submit",e=>{e.preventDefault();const v=$("homePrompt").value.trim();if(!v)return;$("chatInput").value=v;$("homePrompt").value="";showView("chatView");$("chatForm").dispatchEvent(new Event("submit",{bubbles:true,cancelable:true}));});
+document.querySelectorAll("[data-prompt]").forEach(b=>b.addEventListener("click",()=>{$("homePrompt").value=b.dataset.prompt;$("homePrompt").focus();}));
 if ($("settingsBtn")) $("settingsBtn").addEventListener("click",()=>showView("settingsView"));
 if ($("heroSpeak")) $("heroSpeak").addEventListener("click",()=>{showView("voiceView");if($("listenBtn"))$("listenBtn").click();});
 if ($("backHome")) $("backHome").addEventListener("click",()=>showView("homeView"));
