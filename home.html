@@ -188,6 +188,55 @@ footer{color:#9f906f}
 .voice-status{color:var(--muted)}
 @media(max-width:420px){.hero{padding:20px 16px}.hero-speak{width:auto;height:auto}}
 
+
+/* BAJRANG AI — Luxury Mobile AI dashboard (selected design) */
+:root{--bg:#04150d;--panel:#0d2919;--panel2:#143a24;--line:#6d8b45;--gold:#e6bd58;--gold2:#ffedb0;--text:#f8f7ed;--muted:#c1d1b9;--green:#78e78a}
+html{background:#04150d}
+body{background:radial-gradient(ellipse at 50% -12%,#327345 0,#123a25 36%,#06170f 78%);color:var(--text)}
+.app{max-width:760px;padding:14px 13px 104px}
+header{padding:8px 2px 17px}
+.brand{gap:11px}
+.logo{width:50px;height:50px;border-radius:17px;background:linear-gradient(145deg,#fff2bd,#e4b84c 55%,#98691e);color:#16331d;border:1px solid #ffedb0;box-shadow:0 0 28px #d7b34a55}
+h1{font-size:clamp(20px,5vw,28px);letter-spacing:2px;color:#ffe7a0;text-shadow:0 2px 15px #d5a94355}
+.tag{font-size:10px;letter-spacing:1.2px;color:#d5e8cb}
+.head-actions .mini{border-color:#6a8748;background:linear-gradient(145deg,#1c482c,#0c2919);color:#ffedb0}
+.hero{min-height:300px;text-align:center;padding:23px 17px 22px;border:1px solid #b18a3b;border-radius:28px;background:radial-gradient(circle at 50% 24%,#3c8a4a 0,transparent 43%),radial-gradient(circle at 50% 100%,#2b6538 0,transparent 55%),linear-gradient(145deg,#17452a,#092719 65%,#302412);box-shadow:0 22px 55px #0008,inset 0 1px #fff4c544;overflow:hidden}
+.hero:after{content:"";position:absolute;width:220px;height:220px;left:calc(50% - 110px);right:auto;top:75px;border-radius:50%;border:1px solid #f3d98733;background:radial-gradient(circle,#b5e9a21b 0 27%,#b5e9a20a 28% 58%,transparent 59%);box-shadow:0 0 55px #9ae77c20;pointer-events:none}
+.hero .eyebrow{position:relative;z-index:1;color:#f5db8c;font-weight:800;letter-spacing:1.6px}
+.hero h2{position:relative;z-index:1;color:#fff0b4;font-size:clamp(25px,7vw,36px);line-height:1.13;margin:10px auto 8px;text-shadow:0 2px 15px #0009}
+.hero p{position:relative;z-index:1;color:#e0ebdd;margin:0 auto 12px;max-width:480px}
+.hero .status{position:relative;z-index:1;background:#0c321e;border-color:#77b56a;color:#d7f7c8}
+.hero-speak{position:relative;z-index:2;width:116px;height:116px;margin:20px auto 0;padding:12px;border-radius:50%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2px;background:radial-gradient(circle at 30% 22%,#fff3c5,#e8bd55 55%,#93631d);border:2px solid #fff0b2;color:#17351d;font-weight:900;font-size:12px;line-height:1.2;box-shadow:0 0 0 7px #a6e27d27,0 0 34px #a6e27d66,0 10px 22px #0008;animation:luxPulse 3s ease-in-out infinite}
+.hero-speak .mic{font-size:32px;line-height:1.1}
+@keyframes luxPulse{0%,100%{box-shadow:0 0 0 6px #a6e27d24,0 0 25px #a6e27d55,0 10px 22px #0008}50%{box-shadow:0 0 0 11px #a6e27d36,0 0 42px #a6e27d77,0 10px 22px #0008}}
+.lux-status{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:13px 0 21px;padding:12px 9px;border:1px solid #8c773f;border-radius:19px;background:linear-gradient(135deg,#112d1d,#183b24 55%,#2b2111);box-shadow:0 10px 28px #0005,inset 0 1px #fff2b322}
+.lux-status-item{min-width:0;text-align:center;padding:4px 2px}
+.lux-status-item+.lux-status-item{border-left:1px solid #d5c17b55}
+.lux-status-item b{display:block;font-size:12px;color:#ffe7a0;line-height:1.3}
+.lux-status-item span{display:block;font-size:10px;color:#c7ddc0;margin-top:4px;overflow-wrap:anywhere}
+.section-head{margin:20px 2px 12px}
+.section-head h3{color:#ffe5a0;font-size:17px}
+.section-head .muted{color:#c4d6bb;font-size:11px}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.tile,.panel{border:1px solid #80663a;border-radius:20px;background:linear-gradient(145deg,#1b4a2c 0%,#12351f 58%,#2a2112 100%);box-shadow:0 11px 27px #0005,inset 0 1px #fff3c51c;color:#fff7df}
+.tile{min-height:125px;padding:15px;position:relative;overflow:hidden}
+.tile:before{content:"";position:absolute;inset:5px;border:1px solid #d8bd7040;border-radius:15px;pointer-events:none}
+.tile:after{content:"";position:absolute;width:75px;height:75px;right:-28px;bottom:-34px;border-radius:50%;background:#b8e68b20;filter:blur(2px);pointer-events:none}
+.tile:hover{border-color:#f0d17b;transform:translateY(-2px);box-shadow:0 13px 30px #b18b3430}
+.ico{width:43px;height:43px;border-radius:14px;background:linear-gradient(145deg,#315f3a,#183c27);border:1px solid #88a85a;color:#ffe7a0;box-shadow:0 4px 12px #0004}
+.tile b{color:#fff0c0;font-size:14px}.tile small{color:#d1dfc9;font-size:11px}
+.panel{padding:17px;margin-top:14px}
+.field,.chatlog,.note{background:#081b11;border:1px solid #456c43;color:#f7f5e9;border-radius:14px}
+.field:focus{border-color:#e7c45f;box-shadow:0 0 0 2px #e7c45f22}
+.primary{background:linear-gradient(135deg,#fff0b5,#e4b84c 58%,#9a6d21);color:#1b301c;box-shadow:0 5px 16px #d6a33c33}
+.secondary{background:linear-gradient(145deg,#245235,#102e1d);color:#fff0bd;border:1px solid #698d4d}
+.bot{background:#153c25;border-color:#416d45}.user{background:#624a23;color:#fff5d9}
+.bottom{background:#06170ff2;border-top:1px solid #647f43;backdrop-filter:blur(16px)}
+.nav{max-width:620px}.nav button{color:#c4d6bb;font-size:10px}.nav button.active{color:#ffe7a0;background:#244a2d}
+footer{color:#a8c29d}
+@media(max-width:380px){.app{padding-left:10px;padding-right:10px}.hero{padding:20px 13px;min-height:286px}.hero-speak{width:106px;height:106px}.lux-status{padding:10px 5px;gap:3px}.lux-status-item b{font-size:10px}.lux-status-item span{font-size:9px}.tile{padding:12px;min-height:116px}}
+@media(min-width:650px){.app{padding-top:22px}.hero{min-height:330px;padding:30px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.tile{min-height:138px}}
+
 </style>
 </head>
 <body>
@@ -199,6 +248,8 @@ footer{color:#9f906f}
 <main>
 <section id="homeView" class="view active">
  <div class="hero"><div class="eyebrow" data-i18n="welcome">YOUR AI PARTNER FOR A SMARTER LIFE</div><h2 data-i18n="heroTitle">Hello, Preet Pandey!</h2><p data-i18n="heroText">Stay smart, stay happy — your BAJRANG AI assistant is ready.</p><span class="status"><i class="dot"></i><span data-i18n="ready">System Online</span></span><br><button class="hero-speak" id="heroSpeak" type="button"><span class="mic">🎙</span> Speak Now</button></div>
+
+ <div class="lux-status" aria-label="BAJRANG AI features"><div class="lux-status-item"><b>🎙 Voice Assistant</b><span>Speak naturally</span></div><div class="lux-status-item"><b>🌐 Hindi + English</b><span>Two-language support</span></div><div class="lux-status-item"><b>✦ AI Chat</b><span>Online assistant</span></div></div>
  <div class="section-head"><h3 data-i18n="quick">Quick access</h3><span class="muted" data-i18n="choose">Choose a tool</span></div>
  <div class="grid">
   <button class="tile" data-open="chatView"><div class="ico">✦</div><b data-i18n="chat">AI Chat</b><small data-i18n="chatDesc">Talk with your assistant</small></button>
