@@ -237,7 +237,7 @@ footer{color:#a8c29d}
 @media(max-width:380px){.app{padding-left:10px;padding-right:10px}.hero{padding:20px 13px;min-height:286px}.hero-speak{width:106px;height:106px}.lux-status{padding:10px 5px;gap:3px}.lux-status-item b{font-size:10px}.lux-status-item span{font-size:9px}.tile{padding:12px;min-height:116px}}
 @media(min-width:650px){.app{padding-top:22px}.hero{min-height:330px;padding:30px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.tile{min-height:138px}}
 
-</style>
+\n/* Founder profile details */\n.founder-profile{padding:16px;border-color:#b18a3b;background:linear-gradient(145deg,#19452a,#102d1d 62%,#2b2112)}\n.founder-name{font-size:20px;font-weight:850;color:#ffe7a0;margin:7px 0}\n.founder-bio{font-size:13px;line-height:1.65;color:#e1ead8;margin:7px 0 0}\n</style>
 </head>
 <body>
 <div class="app">
@@ -283,7 +283,7 @@ footer{color:#a8c29d}
  <div class="panel"><h3 data-i18n="tools">Phone tools</h3><p data-i18n="toolsNotice">These are safe shortcuts and information only. A website cannot silently control all Android settings.</p><div class="note"><b data-i18n="device">Device</b><div id="deviceInfo">Android browser</div></div><div class="note"><b data-i18n="battery">Battery</b><div id="batteryInfo" data-i18n="batteryUnavailable">Battery status is not available in this browser.</div></div><button class="secondary" id="batteryCheck" data-i18n="checkBattery">Check battery</button></div>
 </section>
 <section id="aboutView" class="view">
- <div class="panel"><h3 data-i18n="about">About BAJRANG</h3><p data-i18n="aboutText">BAJRANG AI is your personal assistant project. This is the first dashboard release.</p><div class="note"><b>Founder / संस्थापक</b><div>Preet Pandey</div></div><div class="note"><b>Village / गाँव</b><div>Bramankhedi</div></div><div class="note"><b>AI Development Assistant / AI विकास सहायक</b><div>ChatGPT (GPT-6)</div></div><div class="note"><b>Version</b><div>1.2 — Voice Assistant</div></div><div class="note"><b data-i18n="privacy">Privacy</b><div data-i18n="privacyText">Notes and reminders are stored locally in this browser. Do not save passwords or sensitive information.</div></div><div class="note"><b data-i18n="nextStep">Next step</b><div data-i18n="nextText">Improve offline chat and add approved Android features.</div></div></div>
+ <div class="panel"><h3 data-i18n="about">About BAJRANG</h3><p data-i18n="aboutText">BAJRANG AI is your personal assistant project. This is the first dashboard release.</p><div class="note founder-profile"><b>Founder / संस्थापक</b><div class="founder-name">Preet Pandey</div><p class="founder-bio">Preet Pandey is the founder and project creator of BAJRANG AI, a mobile personal-assistant project being built step by step. The dashboard brings together AI chat, voice assistance, notes, reminders and useful phone tools.</p><p class="founder-bio" lang="hi">प्रीत पांडेय BAJRANG AI के संस्थापक और प्रोजेक्ट निर्माता हैं। BAJRANG AI को एक उपयोगी मोबाइल पर्सनल असिस्टेंट बनाने पर काम किया जा रहा है, जिसमें AI चैट, वॉइस असिस्टेंट, नोट्स, रिमाइंडर और फोन टूल्स शामिल हैं।</p></div><div class="note"><b>Village / गाँव</b><div>Bramankhedi</div></div><div class="note"><b>AI Development Assistant / AI विकास सहायक</b><div>ChatGPT (GPT-6)</div></div><div class="note"><b>Version</b><div>1.2 — Voice Assistant</div></div><div class="note"><b data-i18n="privacy">Privacy</b><div data-i18n="privacyText">Notes and reminders are stored locally in this browser. Do not save passwords or sensitive information.</div></div><div class="note"><b data-i18n="nextStep">Next step</b><div data-i18n="nextText">Improve offline chat and add approved Android features.</div></div></div>
 </section>
 <section id="settingsView" class="view"><div class="panel"><h3 data-i18n="settings">Settings</h3><p data-i18n="settingsText">Choose your language from the top button. More settings will be added later.</p><button class="secondary" id="backHome" data-i18n="backHome">Back to dashboard</button></div></section>
 </main>
@@ -364,7 +364,7 @@ if($("chatForm")) $("chatForm").addEventListener("submit",async e=>{
   if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
    const d=document.createElement("div");d.className="bubble bot";
    const img=document.createElement("img");img.src="./founder.jpg";img.alt="BAJRANG AI Founder";img.loading="lazy";img.style.cssText="display:block;width:100%;max-width:180px;height:auto;border-radius:12px";
-   d.appendChild(img);$("chatLog").appendChild(d);
+   d.appendChild(img);const bio=document.createElement("p");bio.className="founder-bio";bio.textContent=lang==="hi"?"प्रीत पांडेय BAJRANG AI के संस्थापक और प्रोजेक्ट निर्माता हैं। वे इसे एक उपयोगी मोबाइल पर्सनल असिस्टेंट बनाने पर काम कर रहे हैं। इसमें AI चैट, वॉइस असिस्टेंट, नोट्स, रिमाइंडर और फोन टूल्स शामिल हैं।":"Preet Pandey is the founder and project creator of BAJRANG AI. The project is being developed step by step as a useful mobile personal assistant with AI chat, voice assistance, notes, reminders and phone tools.";d.appendChild(bio);$( "chatLog" ).appendChild(d);
   }
  }catch(error){
   pending.textContent=(lang==="hi"?"कनेक्शन में समस्या: ":"Connection error: ")+(error&&error.message?error.message:"कृपया फिर कोशिश करें।");
