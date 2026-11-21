@@ -389,21 +389,23 @@ function chooseSpeechVoice(locale){
  const voices=window.speechSynthesis&&window.speechSynthesis.getVoices?window.speechSynthesis.getVoices():[];
  const prefix=locale.slice(0,2).toLowerCase();
  const matching=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith(prefix));
- const preferred=matching.find(v=>/(google.*hindi|heera|veena|priya|aditi|hindi)/i.test(v.name));
- return preferred||matching.find(v=>v.default)||matching[0]||null;
+ if(prefix==="hi"){
+  const indianHindi=matching.find(v=>/hi[-_]in/i.test(v.lang));
+  const naturalHindi=matching.find(v=>/(google.*hindi|hindi.*(india|female)|heera|priya|aditi)/i.test(v.name));
+  return naturalHindi||indianHindi||matching.find(v=>v.default)||matching[0]||null;
+ }
+ return matching.find(v=>v.default)||matching[0]||null;
 }
 function splitSpeech(text){
- const clean=String(text||"").replace(/\s+/g," ").trim();
+ const clean=String(text||"").replace(/[ \t]+/g," ").replace(/\n+/g,"। ").trim();
  if(!clean)return [];
  const sentences=clean.match(/[^.!?।]+[.!?।]?/g)||[clean];
  const chunks=[];let part="";
  for(const sentence of sentences){
-  const words=sentence.trim().split(" ");
-  for(const word of words){
+  for(const word of sentence.trim().split(" ")){
    if(!word)continue;
    const next=(part+" "+word).trim();
-   if(next.length>220&&part){chunks.push(part.trim());part=word;}
-   else part=next;
+   if(next.length>150&&part){chunks.push(part.trim());part=word;}else part=next;
   }
   if(part&&/[.!?।]$/.test(sentence.trim())){chunks.push(part.trim());part="";}
  }
@@ -428,10 +430,10 @@ function speakNextChunk(token){
  if(!item){speechBusy=false;if($("voiceStatus"))$("voiceStatus").textContent="आवाज़ पूरी हुई।";return;}
  speechBusy=true;
  const utterance=new SpeechSynthesisUtterance(item.part);
- utterance.lang=item.locale;utterance.rate=1.25;utterance.pitch=1.0;
- if(item.voice)utterance.voice=item.voice;
+ utterance.lang=item.locale;utterance.rate=item.locale==="hi-IN"?0.90:0.98;utterance.pitch=1.02;utterance.volume=1;
+ const freshVoice=chooseSpeechVoice(item.locale);if(freshVoice)utterance.voice=freshVoice;
  utterance.onstart=()=>{if($("voiceStatus"))$("voiceStatus").textContent="BAJRANG AI बोल रहा है…";};
- utterance.onend=()=>{if(token===speechToken)setTimeout(()=>speakNextChunk(token),100);};
+ utterance.onend=()=>{if(token===speechToken)setTimeout(()=>speakNextChunk(token),item.locale==="hi-IN"?260:140);};
  utterance.onerror=()=>{if(token===speechToken){if($("voiceStatus"))$("voiceStatus").textContent="आवाज़ रुक गई। फोन की Text-to-Speech सेटिंग जाँचें।";speechQueue=[];speechBusy=false;}};
  window.speechSynthesis.speak(utterance);
 }
