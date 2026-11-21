@@ -1,4 +1,4 @@
-const CACHE_NAME = "bajrang-ai-dashboard-v20";
+const CACHE_NAME = "bajrang-ai-dashboard-v21";
 const APP_FILES = [
   "./",
   "./index.html",
