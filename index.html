@@ -269,7 +269,7 @@ footer{color:#a8c29d}
  <div class="panel"><h3 data-i18n="voice">Voice Assistant</h3><p data-i18n="voiceNotice">Tap the microphone and speak. Speech recognition depends on browser support and may need internet.</p>
   <div class="actions"><button class="primary" id="listenBtn">🎙 <span data-i18n="startListening">Start listening</span></button><button class="secondary" id="stopVoiceBtn" type="button">■ Stop voice</button></div>
   <div id="voiceResult" class="note" data-i18n="voiceIdle">Your spoken words will appear here.</div>
-  <div class="actions"><button class="secondary" id="sendVoice" data-i18n="sendToChat">Send to chat</button><label class="voice-option"><input type="checkbox" id="speakReplies" checked> <span>🔊 Speak AI replies</span></label></div>
+  <div class="actions"><button class="secondary" id="sendVoice" data-i18n="sendToChat">Send to chat</button><label class="voice-option"><input type="checkbox" id="speakReplies"> <span>🔊 Speak AI replies</span></label></div>
   <div id="voiceStatus" class="voice-status" aria-live="polite">Voice ready. Your browser's available voice will be used.</div>
  </div>
 </section>
@@ -360,7 +360,7 @@ if($("chatForm")) $("chatForm").addEventListener("submit",async e=>{
   const answer=await sendToBajrangAI(v);
   chatHistory.push({role:"user",content:v},{role:"assistant",content:answer});
   pending.textContent=answer;
-  if($("speakReplies")&&$("speakReplies").checked)speakText(answer);
+  const listenReply=document.createElement("button");listenReply.type="button";listenReply.className="secondary";listenReply.textContent=lang==="hi"?"🔊 जवाब सुनें":"🔊 Listen";listenReply.style.cssText="display:block;margin-top:8px;padding:7px 11px;font-size:12px";listenReply.addEventListener("click",()=>speakText(answer));pending.appendChild(listenReply);
   if(/(founder|फाउंडर|संस्थापक|किसने बनाया|creator|बनाया किसने)/i.test(v)){
    const d=document.createElement("div");d.className="bubble bot";
    const img=document.createElement("img");img.src="./founder.jpg";img.alt="BAJRANG AI Founder";img.loading="lazy";img.style.cssText="display:block;width:100%;max-width:180px;height:auto;border-radius:12px";
