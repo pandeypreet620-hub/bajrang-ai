@@ -277,6 +277,21 @@ h1{color:#ffe3a0;letter-spacing:2px;text-shadow:0 0 18px #d6a33c44}.tag,.eyebrow
 <main>
 <section id="homeView" class="view active">
  <div class="hero"><div class="eyebrow">YOUR PERSONAL AI SPACE</div><h2>Welcome back, Preet.</h2><p>Ask anything. Think freely. Let’s get things done.</p><span class="status"><i class="dot"></i><span>BAJRANG AI assistant</span></span><div class="ai-orb" aria-label="BAJRANG AI assistant"><span>✦</span></div><button class="hero-speak" id="heroSpeak" type="button"><span class="mic">🎙</span> Talk to BAJRANG AI</button></div>
+
+ <section class="panel founder-profile" id="founderProfile" aria-labelledby="founderHeading" style="margin:16px 0;border:1px solid #b18a3b;background:linear-gradient(145deg,#19452a,#102d1d 62%,#2b2112);">
+  <div class="eyebrow" id="founderEyebrow">BAJRANG AI · OFFICIAL PROFILE</div>
+  <h3 id="founderHeading" style="margin:7px 0;color:#ffe7a0">Founder &amp; Project Creator</h3>
+  <div class="founder-name" style="font-size:21px;font-weight:850;color:#ffe7a0">Preet Pandey (प्रीत पांडेय)</div>
+  <p class="founder-bio" id="founderVillage" style="margin:6px 0;color:#e1ead8">Village: Bramankhedi (बामनखेड़ी)</p>
+  <div class="founder-bio" id="founderDetails" style="color:#e1ead8;line-height:1.7">
+   <div><b>Project:</b> BAJRANG AI — Personal AI Assistant</div>
+   <div><b>Languages:</b> Hindi &amp; English</div>
+   <div><b>AI Development Assistant:</b> ChatGPT (GPT-6)</div>
+   <div><b>Contribution:</b> Project planning, coding guidance and improvements</div>
+   <div><b>Features:</b> AI Chat, Voice Assistant, Notes, Reminders, Study Help and everyday assistance</div>
+  </div>
+  <p id="founderOfflineNote" style="margin:10px 0 0;color:#cce8c9;font-size:12px">Founder details are built into this page and included in the offline app cache.</p>
+ </section>
  <div class="home-chat"><label for="homePrompt">What would you like to know?</label><form class="home-chat-row" id="homePromptForm"><input id="homePrompt" autocomplete="off" placeholder="Message BAJRANG AI..." aria-label="Message BAJRANG AI"><button type="submit" aria-label="Send message">➤</button></form><div class="prompt-chips"><button type="button" data-prompt="Explain this simply">Explain simply</button><button type="button" data-prompt="Help me write something">Help me write</button><button type="button" data-prompt="Give me ideas">Give me ideas</button></div></div>
  <div class="ai-note"><i></i> Your AI workspace · Chat in Hindi or English</div><h3 class="home-section-title">Your workspace</h3><div class="home-links"><button class="home-link" type="button" data-open="chatView"><span>✦</span><b>AI Chat</b></button><button class="home-link" type="button" data-open="voiceView"><span>🎙</span><b>Voice Assistant</b></button><button class="home-link" type="button" data-open="notesView"><span>▤</span><b>Notes</b></button><button class="home-link" type="button" data-open="remindersView"><span>◷</span><b>Reminders</b></button></div>
 </section>
@@ -316,6 +331,23 @@ const safeStorage = {
  setItem(key,value){try{if(window.localStorage)window.localStorage.setItem(key,value);}catch(e){}},
  removeItem(key){try{if(window.localStorage)window.localStorage.removeItem(key);}catch(e){}}
 };
+
+const BAJRANG_FOUNDER_RECORD = Object.freeze({
+  founder: "Preet Pandey (प्रीत पांडेय)",
+  village: "Bramankhedi (बामनखेड़ी)",
+  role: "Founder & Project Creator",
+  project: "BAJRANG AI — Personal AI Assistant",
+  languages: ["Hindi", "English"],
+  aiDevelopmentAssistant: "ChatGPT (GPT-6)",
+  contribution: ["Project planning", "Coding guidance", "Improvements"],
+  features: ["AI Chat", "Voice Assistant", "Notes", "Reminders", "Study Help", "Everyday assistance"]
+});
+// Keep a local copy where browser storage is available; the same record is also
+// embedded in this HTML so the profile remains readable offline without storage.
+try {
+  if (window.localStorage) window.localStorage.setItem("bajrang_founder_record", JSON.stringify(BAJRANG_FOUNDER_RECORD));
+} catch (e) {}
+
 function readStoredList(key){try{const value=JSON.parse(safeStorage.getItem(key)||"[]");return Array.isArray(value)?value:[];}catch(e){return [];}}
 let lang = safeStorage.getItem("bajrang_lang") || "en";
 function showView(id) {
