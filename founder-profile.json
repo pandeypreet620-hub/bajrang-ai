@@ -1,0 +1,32 @@
+{
+  "project": "BAJRANG AI",
+  "founder": "Preet Pandey",
+  "founder_hindi": "प्रीत पांडेय",
+  "village": "Bramankhedi",
+  "village_hindi": "बामनखेड़ी",
+  "role": "Founder & Project Creator",
+  "role_hindi": "संस्थापक एवं प्रोजेक्ट निर्माता",
+  "project_type": "Free Personal AI Assistant",
+  "languages": [
+    "Hindi",
+    "English"
+  ],
+  "ai_development_assistant": "ChatGPT (GPT-6)",
+  "contribution": [
+    "Planning",
+    "Coding",
+    "Improvements"
+  ],
+  "features": [
+    "AI Chat",
+    "Voice Assistant",
+    "General Knowledge",
+    "Study Assistance",
+    "Technology Help",
+    "Daily Questions",
+    "Notes",
+    "Reminders",
+    "Phone Tools"
+  ],
+  "offline_record": true
+}
